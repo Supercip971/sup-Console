@@ -4,6 +4,6 @@
 cmake_minimum_required (VERSION 3.8)
 
 # Ajoutez une source à l'exécutable de ce projet.
-add_executable (supConsole "supConsole.cpp" "supConsole.h")
+add_executable (supConsole "supConsole.cpp" "supConsole.hpp" "ConsoleUtil.hpp" "ConsoleUtil.cpp")
 
 # TODO: Ajoutez des tests et installez des cibles si nécessaire.
