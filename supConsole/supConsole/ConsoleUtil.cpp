@@ -1,6 +1,10 @@
 ﻿#include "supConsole.hpp"
 
-
+int MajorVersion = 0;
+int minorVersion = 1;
+int subVersion = 12; // for change id (+1 for every commit in github)
+std::string changeLog = "version 0.1 still in beta"
+		"commit 12 : add changelog and update how subVersion is calc";
 namespace SC {
 
 	void ConsolePrint(std::string ttoPrint, ConsoleAttribute attribute) {
@@ -92,10 +96,7 @@ namespace SC {
 
 	void init(int width, int height) {
 		ClearConsole();
-		int MajorVersion = 0;
-		int minorVersion =1 ;
-		int subVersion = 3; // for change id (+1 for every push in github)
-		bool beta = true;
+			bool beta = true;
 		ConsolePrint("##########\n", ConsoleAttribute(GREEN));
 		ConsolePrint("#        #\n", ConsoleAttribute(GREEN));
 		ConsolePrint("#  ##### # ", ConsoleAttribute(GREEN));
