@@ -6,7 +6,13 @@
   // system support
  //#define SYS_LINUX 
 #define SYS_WINDOWS
- 
+#ifdef SYS_LINUX
+#include <sys/ioctl.h> // use for get width and get height
+#endif // SYS_LINUX
+
+#ifdef SYS_WINDOWS
+#include <windows.h>
+#endif // SYS_WINDOWS
 
 
 

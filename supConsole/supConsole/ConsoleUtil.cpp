@@ -1,62 +1,39 @@
 #include "supConsole.hpp"
-
 namespace SC {
-	std::string getConsoleAttribute(ConsolePrintAttribute att)
-	{
 
-		std::string s = "\x1B["+std::to_string(att) + "m";
-		
-
-
-		return s;
-	}
 	void ConsolePrint(std::string ttoPrint, ConsoleAttribute attribute) {
 #ifdef SYS_WINDOWS or SYS_LINUX
 		std::cout << attribute.AttribToString() << ttoPrint  ;
 #endif // SYS_WINDOWS
-
-		
-
 	}
 
 	void init(int width, int height) {
 
 	}
 
-	ConsoleAttribute::ConsoleAttribute(ConsolePrintAttribute cpa, ConsoleCol fcol, ConsoleCol bcol)
-	{
-		CAcpa = cpa;
-		CAccf = fcol;
-		CAccb = bcol;
-	}
 
-	ConsoleAttribute::ConsoleAttribute(ConsoleCol fcol)
-	{
-		CAcpa = ConsolePrintAttribute::RESET;
-		CAccf = fcol;
-		CAccb = ConsoleCol::BLACK;
-	}
 
-	ConsoleAttribute::ConsoleAttribute(ConsoleCol fcol, ConsoleCol bcol)
-	{
-		CAcpa = ConsolePrintAttribute::RESET;
-		CAccf = fcol;
-		CAccb = bcol;
-	}
+	
 
-	ConsoleAttribute::ConsoleAttribute(ConsolePrintAttribute cpa)
+	vec2 getConsoleSize()
 	{
-		CAcpa = cpa;
-		CAccf = ConsoleCol::WHITE;
-		CAccb = ConsoleCol::BLACK;
-	}
+		vec2 size = { 0,0 };
+#ifdef SYS_LINUX
+		struct winsize w;
+		ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
+		size.y = (float) w.ws_row;
+		size.x = (float) w.ws_col;
+#endif // SYS_LINUX
+#ifdef SYS_WINDOWS
+		CONSOLE_SCREEN_BUFFER_INFO csbi;
+		GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
+		size.x = csbi.srWindow.Right - csbi.srWindow.Left + 1;
+		size.y = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
 
-	std::string ConsoleAttribute::AttribToString()
-	{
-		
-		std::string str;
-		str =  "\x1B[" + std::to_string(CAcpa) + ";" +std::to_string(CAccf) + ";" + std::to_string(CAccb+ 10) + "m";
-		return str;
+
+#endif // SYS_WINDOWS
+
+		return size;
 	}
 
 }

@@ -3,7 +3,11 @@
 #include <string> 
 
 namespace SC {
-
+	struct vec2
+	{
+		float x;
+		float y;
+	};
 	 enum  ConsolePrintAttribute 
 	{
 		RESET = 0,
@@ -57,9 +61,9 @@ namespace SC {
 
 
 	 
-	 std::string getConsoleAttribute(ConsolePrintAttribute att);
 	void ConsolePrint(std::string ttoPrint, ConsoleAttribute attribute)
 		; // print a thing in the console
-	
+
+	vec2 getConsoleSize();
 	void init(int width, int height); // init the console
 }
