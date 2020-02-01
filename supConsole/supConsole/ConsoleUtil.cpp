@@ -8,17 +8,41 @@ namespace SC {
 		std::cout << attribute.AttribToString() << ttoPrint  ;
 #endif // SYS_WINDOWS
 	}
-
-	void process(std::string input)
+	std::string filePath;
+	void clog(std::string log, logType logtype)
 	{
 
+		switch (logtype)
+		{
+		case SC::LOG_NORMAL:
+			ConsolePrint("", SC::ConsoleAttribute(ConsolePrintAttribute::RESET));
+			ConsolePrint("[LOG] :", SC::ConsoleAttribute(ConsoleCol::GREEN));
+			ConsolePrint(log + "\n", SC::ConsoleAttribute(ConsoleCol::WHITE));
+		case SC::LOG_WARNING:
+			ConsolePrint("", SC::ConsoleAttribute(ConsolePrintAttribute::RESET));
+			ConsolePrint("[WARNING] :", SC::ConsoleAttribute(ConsoleCol::YELLOW));
+			ConsolePrint(log + "\n", SC::ConsoleAttribute(ConsoleCol::WHITE));
+			break;
+		case SC::LOG_ERROR:
+			ConsolePrint("", SC::ConsoleAttribute(ConsolePrintAttribute::RESET));
+			ConsolePrint("[ERROR] :", SC::ConsoleAttribute(ConsoleCol::RED));
+			ConsolePrint(log + "\n", SC::ConsoleAttribute(ConsoleCol::WHITE));
+			break;
+		default:
+			break;
+		}
+	}
+	void process(std::string input)
+	{
+		input.find('\n');
+		clog(input + "is not a valid command, try help to get help", SC::LOG_ERROR);
 	}
 
 	void init(int width, int height) {
 		ClearConsole();
 		int MajorVersion = 0;
 		int minorVersion =1 ;
-		int subVersion = 1; // for change id (+1 for every push in github)
+		int subVersion = 2; // for change id (+1 for every push in github)
 		bool beta = true;
 		ConsolePrint("##########\n", ConsoleAttribute(GREEN));
 		ConsolePrint("#        #\n", ConsoleAttribute(GREEN));

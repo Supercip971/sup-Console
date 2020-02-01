@@ -17,18 +17,23 @@ private:
 };
 
 
-int main()
-{
+
+int main(int argc, char* argv[]) {
+	cout << "the address is: " << argv[0] << endl;
+	std::string fpath = argv[0];
 	SC::init(0, 0);
-	SC::ConsolePrint("hello world", SC::ConsoleAttribute(SC::RED,SC::BLUE));
-	SC::ConsolePrint("hello world", SC::ConsoleAttribute(SC::RED));
-	SC::ConsolePrint("hello world", SC::ConsoleAttribute(SC::UNDERLINE,SC::RED, SC::BLUE)); // esc char
-	SC::ConsolePrint("hello world", SC::ConsoleAttribute(SC::UNDERLINE, SC::RED, SC::BLUE)); // esc char
-	std::string s = "j";
+	ConsolePrint("", SC::ConsoleAttribute(SC::ConsolePrintAttribute::RESET, SC::WHITE, SC::BLACK));
 	while (true)
 	{
-		
-		
+		std::string input ;
+		ConsolePrint(fpath, SC::ConsoleAttribute(SC::ConsolePrintAttribute::BOLD, SC::S_CYAN, SC::BLACK));
+		ConsolePrint(">", SC::ConsoleAttribute(SC::ConsolePrintAttribute::BOLD, SC::GREEN, SC::BLACK));
+		ConsolePrint("", SC::ConsoleAttribute(SC::ConsolePrintAttribute::RESET, SC::WHITE, SC::BLACK));
+		char s[1000];
+		fgets(s, 1000, stdin);
+		input = s;
+
+		SC::process(input);
 
 	}
 	return 0;

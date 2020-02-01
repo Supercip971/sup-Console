@@ -42,7 +42,11 @@ namespace SC {
 		 FOREGROUND = 0,
 		 BACKGROUND = 10
 	 };
-
+	 enum logType {
+		 LOG_NORMAL = 0,
+		 LOG_WARNING,
+		 LOG_ERROR
+	 };
 	 class ConsoleAttribute
 	 {
 	 public:
@@ -69,6 +73,9 @@ namespace SC {
 
 	void ClearConsole();
 	
+
+	void clog(std::string log, logType logtype);
+
 	void process(std::string input);
 	void init(int width, int height); // init the console
 }
