@@ -65,5 +65,8 @@ namespace SC {
 		; // print a thing in the console
 
 	vec2 getConsoleSize();
+	void setConsoleCurPos(vec2 p);
+	
+
 	void init(int width, int height); // init the console
 }

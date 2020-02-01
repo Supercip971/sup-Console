@@ -1,4 +1,6 @@
 #include "supConsole.hpp"
+
+
 namespace SC {
 
 	void ConsolePrint(std::string ttoPrint, ConsoleAttribute attribute) {
@@ -34,6 +36,13 @@ namespace SC {
 #endif // SYS_WINDOWS
 
 		return size;
+	}
+
+	void setConsoleCurPos(vec2 p)
+	{
+	
+			printf("\033[%f;%fH", p.x + 1, p.y + 1);
+		
 	}
 
 }
