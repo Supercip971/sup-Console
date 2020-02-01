@@ -64,9 +64,11 @@ namespace SC {
 	void ConsolePrint(std::string ttoPrint, ConsoleAttribute attribute)
 		; // print a thing in the console
 
-	vec2 getConsoleSize();
-	void setConsoleCurPos(vec2 p);
-	
+	vec2 getConsSize();
+	void setConsCurPos(vec2 p); // set the cursor pos
 
+	void ClearConsole();
+	
+	void process(std::string input);
 	void init(int width, int height); // init the console
 }

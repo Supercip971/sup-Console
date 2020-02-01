@@ -19,6 +19,7 @@ private:
 
 int main()
 {
+	SC::init(0, 0);
 	SC::ConsolePrint("hello world", SC::ConsoleAttribute(SC::RED,SC::BLUE));
 	SC::ConsolePrint("hello world", SC::ConsoleAttribute(SC::RED));
 	SC::ConsolePrint("hello world", SC::ConsoleAttribute(SC::UNDERLINE,SC::RED, SC::BLUE)); // esc char
@@ -27,8 +28,7 @@ int main()
 	while (true)
 	{
 		
-
-
+		
 
 	}
 	return 0;
