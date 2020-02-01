@@ -16,16 +16,17 @@ namespace SC {
 		{
 		case SC::LOG_NORMAL:
 			ConsolePrint("", SC::ConsoleAttribute(ConsolePrintAttribute::RESET));
-			ConsolePrint("[LOG] :", SC::ConsoleAttribute(ConsoleCol::GREEN));
+			ConsolePrint("[LOG] : ", SC::ConsoleAttribute(ConsoleCol::GREEN));
 			ConsolePrint(log + "\n", SC::ConsoleAttribute(ConsoleCol::WHITE));
+			break;
 		case SC::LOG_WARNING:
 			ConsolePrint("", SC::ConsoleAttribute(ConsolePrintAttribute::RESET));
-			ConsolePrint("[WARNING] :", SC::ConsoleAttribute(ConsoleCol::YELLOW));
+			ConsolePrint("[WARNING] : ", SC::ConsoleAttribute(ConsoleCol::YELLOW));
 			ConsolePrint(log + "\n", SC::ConsoleAttribute(ConsoleCol::WHITE));
 			break;
 		case SC::LOG_ERROR:
 			ConsolePrint("", SC::ConsoleAttribute(ConsolePrintAttribute::RESET));
-			ConsolePrint("[ERROR] :", SC::ConsoleAttribute(ConsoleCol::RED));
+			ConsolePrint("[ERROR] : ", SC::ConsoleAttribute(ConsoleCol::RED));
 			ConsolePrint(log + "\n", SC::ConsoleAttribute(ConsoleCol::WHITE));
 			break;
 		default:
@@ -34,15 +35,66 @@ namespace SC {
 	}
 	void process(std::string input)
 	{
-		input.find('\n');
-		clog(input + "is not a valid command, try help to get help", SC::LOG_ERROR);
+
+		input.erase(std::remove(input.begin(), input.end(), '\n'), input.end());
+		std::string d;
+		int argNum = 0;
+		bool isCommarg = false;
+		
+		unsigned first = input.find('{');
+		unsigned last = input.find('}');
+		if (first != NULL)
+		{
+			if (last != NULL)
+			{
+				if (first < last)
+				{
+					isCommarg = true;
+				}
+				else
+				{
+					clog( " '{' is used after '}' ", SC::LOG_ERROR);
+				}
+			}
+		}
+		if (isCommarg == true)
+		{
+			std::string commArg = input.substr(first, last - first);
+			input.erase(first, (last ) - (first));
+
+			commArg.erase(std::remove(commArg.begin(), commArg.end(), '}'), commArg.end());
+			commArg.erase(std::remove(commArg.begin(), commArg.end(), '{'), commArg.end());
+			clog(commArg + " is  commArgument", SC::LOG_NORMAL);
+		}
+
+
+		input.erase(std::remove(input.begin(), input.end(), '}'), input.end());
+		input.erase(std::remove(input.begin(), input.end(), '{'), input.end()); // used for commarg
+
+		std::istringstream iss(input);
+		while (iss >> d) {
+			
+			if (argNum == 0)
+			{
+				clog(d + " is not a valid command, try help to get help", SC::LOG_ERROR);
+			}
+			if (d.c_str() !="}")
+			{
+
+				clog(std::to_string(argNum) + " is" + d, SC::LOG_NORMAL);
+			}
+			argNum++;
+
+		}
+		
+		
 	}
 
 	void init(int width, int height) {
 		ClearConsole();
 		int MajorVersion = 0;
 		int minorVersion =1 ;
-		int subVersion = 2; // for change id (+1 for every push in github)
+		int subVersion = 3; // for change id (+1 for every push in github)
 		bool beta = true;
 		ConsolePrint("##########\n", ConsoleAttribute(GREEN));
 		ConsolePrint("#        #\n", ConsoleAttribute(GREEN));
@@ -53,11 +105,11 @@ namespace SC {
 		ConsolePrint("# ##     # ", ConsoleAttribute(GREEN));
 		if (beta)
 		{
-			ConsolePrint("version : [BETA] " + std::to_string(MajorVersion) + "." + std::to_string(minorVersion) + "." + std::to_string(subVersion) + "\n", ConsoleAttribute(S_CYAN));
+			ConsolePrint("version : [BETA] " + std::to_string(MajorVersion) + "." + std::to_string(minorVersion) + "       edition : " + std::to_string(subVersion) + "\n", ConsoleAttribute(S_CYAN));
 		}
 		else
 		{
-			ConsolePrint("version : " + std::to_string(MajorVersion) + "." + std::to_string(minorVersion) + "." + std::to_string(subVersion) + "\n", ConsoleAttribute(S_CYAN));
+			ConsolePrint("version : " + std::to_string(MajorVersion) + "." + std::to_string(minorVersion) + "       edition : " + std::to_string(subVersion) + "\n", ConsoleAttribute(S_CYAN));
 		}
 		ConsolePrint("#  ####  #\n", ConsoleAttribute(GREEN));
 		ConsolePrint("#     ## #\n", ConsoleAttribute(GREEN));

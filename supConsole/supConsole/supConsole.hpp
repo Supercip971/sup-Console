@@ -15,7 +15,9 @@
 #endif // SYS_WINDOWS
 
 
+#include <algorithm>
 
+#include <sstream>
 #include "ConsoleUtil.hpp"
 #include <iostream>
 #include <iomanip>
