@@ -41,11 +41,11 @@ namespace SC {
 		int argNum = 0;
 		bool isCommarg = false;
 		
-		unsigned first = input.find('{');
-		unsigned last = input.find('}');
-		if (first != NULL)
+		int first = input.find('{');
+		int last = input.find('}');
+		if (first != -1)
 		{
-			if (last != NULL)
+			if (last != -1)
 			{
 				if (first < last)
 				{
