@@ -11,6 +11,15 @@ file(GLOB ldd
     "lib/lua/*.cpp"
     "lib/lua/*.c"
 )
+file(GLOB luad
+    "app/*.lua"
+)
+
 add_executable (supConsole "main.cpp" "supConsole.hpp" "ConsoleUtil.hpp" "ConsoleUtil.cpp" "ConsoleAttrib.cpp" "luaSC.cpp" ${ldd})
 
+add_custom_command(
+        TARGET supConsole POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_SOURCE_DIR}/app
+                ${CMAKE_CURRENT_BINARY_DIR}/app)
 # TODO: Ajoutez des tests et installez des cibles si nécessaire.

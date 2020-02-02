@@ -8,6 +8,7 @@ std::string changeLog = "version 0.1 still in beta"
 		"commit 13 : add lib for lua support "
 	"commit 14 : support for lua with lua {code} function";
 namespace SC {
+	std::string* fPath ;
 	lua_State* L;
 	void ConsolePrint(std::string ttoPrint, ConsoleAttribute attribute) {
 #ifdef SYS_WINDOWS or SYS_LINUX
@@ -145,15 +146,42 @@ namespace SC {
 						else
 						{
 							lua_getglobal(L, "run");
+
+							std::string strListtemp = "";
+
+							for (int i = 1; i < numArg-1; ++i) // sorting by alphabetical order
+								for (int j = i + 2; j < numArg; ++j)
+								{
+									if (strList[i] > strList[j])
+									{
+										strListtemp = strList[i];
+										strList[i] = strList[j];
+										strList[j] = strListtemp;
+									}
+								}
+							
+							for (int i = 1; i < numArg; i++)
+							{
+
+								lua_pushstring(L, strList[i].c_str());
+
+							}
+
+							lua_pcall(L, numArg-1, 0, 0);
 						}
 					}
 					else
 					{
 
 						lua_getglobal(L, "run");
+
+						lua_pcall(L, 0, 0, 0);
 					}
 					
-					lua_pcall(L, 0, 0, 0);
+					/* the first argument */
+
+					/* the second argument */
+
 				}
 			}
 			delete[] strList;
@@ -194,7 +222,20 @@ namespace SC {
 		return 0;
 	}
 
+	static int getFPath(lua_State* Li) {
+		int n = lua_gettop(Li);
 
+		lua_pushfstring(Li, (*fPath).c_str());
+
+		return 1;
+	}
+	static int setFPath(lua_State* Li) {
+
+		int n = lua_gettop(Li);
+		filePath = lua_tostring(Li, 1);
+
+		return 0;
+	}
 	static int  LuagetVer(lua_State* Li)
 	{
 		int n = lua_gettop(Li);
@@ -211,16 +252,18 @@ namespace SC {
 	}
 #pragma endregion
 
-	void init(int width, int height) {
-
+	void init(int width, int height, std::string* path) {
+		fPath = path;
 		clog("loading lua", LOG_NORMAL);
 		L = luaL_newstate();
 
 		clog("loading lua lib", LOG_NORMAL);
 		luaL_openlibs(L);
 		clog("loading lua function", LOG_NORMAL);
-		lua_register(L, "log", LuaLog); //  log(logstring, logtype (normal | warning | error or null)) return : nothing
-		lua_register(L, "getVer", LuagetVer); //  getVer() return : majorVersion, minorVersion, subVersion
+		lua_register(L, "log", LuaLog); //  log(logstring, logtype (normal | warning | error or null)) return : nothing | log
+		lua_register(L, "getVer", LuagetVer); //  getVer() return : majorVersion, minorVersion, subVersion | get versions
+		lua_register(L, "getFilePath", getFPath); //  getFilePath() return : current file path | get the current file path
+		lua_register(L, "setFilePath", setFPath); //  setFilePath(string path) return : nothing | set current file path
 
 		
 			/* get number of arguments */

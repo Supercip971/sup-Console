@@ -352,7 +352,7 @@ build supConsole\supConsole.exe: CXX_EXECUTABLE_LINKER__supConsole supConsole\CM
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
-  POST_BUILD = cd .
+  POST_BUILD = cmd.exe /C "cd /D D:\source\supConsole\sup-Console\supConsole\out\build\x64-Release\supConsole && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy D:/source/supConsole/sup-Console/supConsole/app D:/source/supConsole/sup-Console/supConsole/out/build/x64-Release/supConsole/app"
   PRE_LINK = cd .
   TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
   TARGET_FILE = supConsole\supConsole.exe

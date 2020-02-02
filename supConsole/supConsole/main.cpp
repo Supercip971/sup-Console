@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
 	cout << "the address is: " << argv[0] << endl;
 
 	std::string fpath = GetPrevDirectoryPath(argv[0]);
-	SC::init(0, 0);
+	SC::init(0, 0, &fpath);
 	ConsolePrint("", SC::ConsoleAttribute(SC::ConsolePrintAttribute::RESET, SC::WHITE, SC::BLACK));
 	while (true)
 	{
