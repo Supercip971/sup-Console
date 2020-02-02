@@ -4,7 +4,8 @@ int MajorVersion = 0;
 int minorVersion = 1;
 int subVersion = 12; // for change id (+1 for every commit in github)
 std::string changeLog = "version 0.1 still in beta"
-		"commit 12 : add changelog and update how subVersion is calc";
+		"commit 12 : add changelog and update how subVersion is calc"
+		"commit 13 : add lib for lua support ";
 namespace SC {
 
 	void ConsolePrint(std::string ttoPrint, ConsoleAttribute attribute) {
