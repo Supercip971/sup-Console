@@ -119,7 +119,9 @@ namespace SC {
 
 				if (luaL_dofile(L, ("app/" + strList[0] + ".lua").c_str())) {
 
-					clog(lua_tostring(L, -1), SC::LOG_LUA_ERROR);
+					clog(lua_tostring(L, -1) , SC::LOG_LUA_ERROR);
+
+
 				}
 				else
 				{
@@ -152,7 +154,6 @@ namespace SC {
 					}
 					
 					lua_pcall(L, 0, 0, 0);
-					lua_pop(L, 1);
 				}
 			}
 			delete[] strList;
