@@ -34,6 +34,13 @@ namespace SC {
 			ConsolePrint("[ERROR] : ", SC::ConsoleAttribute(ConsoleCol::RED));
 			ConsolePrint(log + "\n", SC::ConsoleAttribute(ConsoleCol::WHITE));
 			break;
+		case SC::LOG_LUA_ERROR:
+
+
+			ConsolePrint("", SC::ConsoleAttribute(ConsolePrintAttribute::RESET));
+			ConsolePrint("[LUA ERROR] : ", SC::ConsoleAttribute(ConsoleCol::S_CYAN));
+			ConsolePrint(log + "\n", SC::ConsoleAttribute(ConsoleCol::WHITE));
+			break;
 		default:
 			break;
 		}
@@ -78,7 +85,10 @@ namespace SC {
 
 		std::istringstream iss(input);
 		while (iss >> d) {
-			
+			if (argNum == 0)
+			{
+
+			}
 			if (argNum == 0)
 			{
 				clog(d + " is not a valid command, try help to get help", SC::LOG_ERROR);

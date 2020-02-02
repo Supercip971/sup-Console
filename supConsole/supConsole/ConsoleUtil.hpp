@@ -45,7 +45,8 @@ namespace SC {
 	 enum logType {
 		 LOG_NORMAL = 0,
 		 LOG_WARNING,
-		 LOG_ERROR
+		 LOG_ERROR,
+		 LOG_LUA_ERROR
 	 };
 	 class ConsoleAttribute
 	 {
@@ -68,14 +69,17 @@ namespace SC {
 	void ConsolePrint(std::string ttoPrint, ConsoleAttribute attribute)
 		; // print a thing in the console
 
-	vec2 getConsSize();
+	vec2 getConsSize(); // get the console size 
 	void setConsCurPos(vec2 p); // set the cursor pos
 
-	void ClearConsole();
+	void ClearConsole(); // clear the console
 	
+	void clog(std::string log, logType logtype); // log
 
-	void clog(std::string log, logType logtype);
-
-	void process(std::string input);
+	void process(std::string input); // process the input
 	void init(int width, int height); // init the console
+
+	 // lua Implementation
+	void luaInterp(std::string cmd); // interpret lua
+
 }
