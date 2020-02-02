@@ -79,7 +79,13 @@ namespace SC {
 	void process(std::string input); // process the input
 	void init(int width, int height); // init the console
 
-	 // lua Implementation
+
+
+	// lua Implementation
+	void print_errorLUA(lua_State* state); // error callback for lua
+
+	void executeLUA(std::string data); // execute lua code
+
 	void luaInterp(std::string cmd); // interpret lua
 
 }

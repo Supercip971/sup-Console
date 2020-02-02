@@ -1,6 +1,4 @@
-﻿// supConsole.h : fichier Include pour les fichiers Include système standard,
-// ou les fichiers Include spécifiques aux projets.
-
+﻿
  // -- OPTION 
 
   // system support
@@ -13,11 +11,18 @@
 #ifdef SYS_WINDOWS
 #include <windows.h>
 #endif // SYS_WINDOWS
+
+
+
 #include <algorithm>
 
 #include <sstream>
+extern "C" {
+#include "lib/lua/lua.h"
+#include "lib/lua/lauxlib.h"
+#include "lib/lua/lualib.h"
+}
+
 #include "ConsoleUtil.hpp"
-#include "lib/lua/lua.hpp"
 #include <iostream>
 #include <iomanip>
-// TODO: Référencez ici les en-têtes supplémentaires nécessaires à votre programme.

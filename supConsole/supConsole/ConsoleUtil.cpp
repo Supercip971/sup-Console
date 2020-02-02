@@ -5,7 +5,8 @@ int minorVersion = 1;
 int subVersion = 12; // for change id (+1 for every commit in github)
 std::string changeLog = "version 0.1 still in beta"
 		"commit 12 : add changelog and update how subVersion is calc"
-		"commit 13 : add lib for lua support ";
+		"commit 13 : add lib for lua support "
+	"commit 14 : support for lua with lua {code} function";
 namespace SC {
 
 	void ConsolePrint(std::string ttoPrint, ConsoleAttribute attribute) {
@@ -38,7 +39,7 @@ namespace SC {
 
 
 			ConsolePrint("", SC::ConsoleAttribute(ConsolePrintAttribute::RESET));
-			ConsolePrint("[LUA ERROR] : ", SC::ConsoleAttribute(ConsoleCol::S_CYAN));
+			ConsolePrint("[LUA ERROR] : ", SC::ConsoleAttribute(ConsoleCol::S_MAGENTA));
 			ConsolePrint(log + "\n", SC::ConsoleAttribute(ConsoleCol::WHITE));
 			break;
 		default:
@@ -52,7 +53,7 @@ namespace SC {
 		std::string d;
 		int argNum = 0;
 		bool isCommarg = false;
-		
+		std::string commArg = "";
 		int first = input.find('{');
 		int last = input.find('}');
 		if (first != -1)
@@ -71,7 +72,7 @@ namespace SC {
 		}
 		if (isCommarg == true)
 		{
-			std::string commArg = input.substr(first, last - first);
+			 commArg = input.substr(first, last - first);
 			input.erase(first, (last ) - (first));
 
 			commArg.erase(std::remove(commArg.begin(), commArg.end(), '}'), commArg.end());
@@ -87,11 +88,18 @@ namespace SC {
 		while (iss >> d) {
 			if (argNum == 0)
 			{
-
+				if (d == "lua" && isCommarg == true)
+				{
+					luaInterp(commArg);
+				}
+				else
+				{
+					clog(d + " is not a valid command, try help to get help", SC::LOG_ERROR);
+				}
 			}
 			if (argNum == 0)
 			{
-				clog(d + " is not a valid command, try help to get help", SC::LOG_ERROR);
+				
 			}
 			if (d.c_str() !="}")
 			{

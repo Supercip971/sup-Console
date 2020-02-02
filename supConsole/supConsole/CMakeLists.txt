@@ -5,12 +5,12 @@ cmake_minimum_required (VERSION 3.8)
 
 # Ajoutez une source à l'exécutable de ce projet.
 
-file(GLOB lib/lua
-    "*.hpp"
-    "*.h"
-    "*.cpp"
+file(GLOB ldd
+    "lib/lua/*.hpp"
+    "lib/lua/*.h"
+    "lib/lua/*.cpp"
+    "lib/lua/*.c"
 )
-
-add_executable (supConsole "main.cpp" "supConsole.hpp" "ConsoleUtil.hpp" "ConsoleUtil.cpp" "ConsoleAttrib.cpp" "luaImpl.cpp" ${lib/lua})
+add_executable (supConsole "main.cpp" "supConsole.hpp" "ConsoleUtil.hpp" "ConsoleUtil.cpp" "ConsoleAttrib.cpp" "luaSC.cpp" ${ldd})
 
 # TODO: Ajoutez des tests et installez des cibles si nécessaire.
