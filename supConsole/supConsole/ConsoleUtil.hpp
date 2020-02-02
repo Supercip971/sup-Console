@@ -77,6 +77,7 @@ namespace SC {
 	void clog(std::string log, logType logtype); // log
 
 	void process(std::string input); // process the input
+	void Close();
 	void init(int width, int height); // init the console
 
 

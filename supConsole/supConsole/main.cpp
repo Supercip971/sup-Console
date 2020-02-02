@@ -32,9 +32,12 @@ int main(int argc, char* argv[]) {
 		char s[1000];
 		fgets(s, 1000, stdin);
 		input = s;
-
+		
 		SC::process(input);
 
 	}
+
+
+	SC::Close();
 	return 0;
 }

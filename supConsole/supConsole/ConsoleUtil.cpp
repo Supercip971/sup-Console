@@ -8,7 +8,7 @@ std::string changeLog = "version 0.1 still in beta"
 		"commit 13 : add lib for lua support "
 	"commit 14 : support for lua with lua {code} function";
 namespace SC {
-
+	lua_State* L;
 	void ConsolePrint(std::string ttoPrint, ConsoleAttribute attribute) {
 #ifdef SYS_WINDOWS or SYS_LINUX
 		std::cout << attribute.AttribToString() << ttoPrint  ;
@@ -85,18 +85,17 @@ namespace SC {
 		input.erase(std::remove(input.begin(), input.end(), '{'), input.end()); // used for commarg
 
 		std::istringstream iss(input);
+
+
+		std::string* strList = new std::string[30];
+		for (int i = 0; i < 30; i++)
+		{
+			strList[i] = "";
+		}
+		int numArg = 0;
 		while (iss >> d) {
-			if (argNum == 0)
-			{
-				if (d == "lua" && isCommarg == true)
-				{
-					luaInterp(commArg);
-				}
-				else
-				{
-					clog(d + " is not a valid command, try help to get help", SC::LOG_ERROR);
-				}
-			}
+			strList[numArg] = d;
+			numArg++;
 			if (argNum == 0)
 			{
 				
@@ -109,13 +108,128 @@ namespace SC {
 			argNum++;
 
 		}
-		
+		clog(std::to_string(numArg) + " number of arg", SC::LOG_NORMAL);
+			if (strList[0] == "lua" && isCommarg == true)
+			{
+				luaInterp(commArg);
+			}
+
+			else
+			{
+
+				if (luaL_dofile(L, ("app/" + strList[0] + ".lua").c_str())) {
+
+					clog(lua_tostring(L, -1), SC::LOG_LUA_ERROR);
+				}
+				else
+				{
+					lua_pcall(L, 0, 0, 0);
+
+					if (numArg > 1)
+					{
+						if (strList[1] == "-help" )
+						{
+							lua_getglobal(L, "help");
+						}
+						else if (strList[1] == "-info" )
+						{
+							lua_getglobal(L, "info");
+						}
+						else if (strList[1] == "-version" )
+						{
+							lua_getglobal(L, "ver");
+
+						}
+						else
+						{
+							lua_getglobal(L, "run");
+						}
+					}
+					else
+					{
+
+						lua_getglobal(L, "run");
+					}
+					
+					lua_pcall(L, 0, 0, 0);
+					lua_pop(L, 1);
+				}
+			}
+			delete[] strList;
 		
 	}
 
+	void Close() {
+		clog("closing lua", LOG_NORMAL);
+		lua_close(L);
+	}
+
+#pragma region luaFunc
+
+	static int  LuaLog(lua_State* Li)
+	{
+		int n = lua_gettop(Li);
+
+		
+		std::string str = lua_tostring(Li, 1);
+		std::string type= lua_tostring(Li, 2);
+		if (type == "error")
+		{
+			clog(str, LOG_ERROR);
+		}else if (type == "normal")
+		{
+			clog(str, LOG_NORMAL);
+		}
+		else if (type == "warning")
+		{
+			clog(str, LOG_WARNING);
+		}
+		else
+		{
+			ConsolePrint(str, SC::ConsoleAttribute(ConsolePrintAttribute::RESET));
+
+		}
+
+		return 0;
+	}
+
+
+	static int  LuagetVer(lua_State* Li)
+	{
+		int n = lua_gettop(Li);
+
+
+
+		lua_pushnumber(Li, MajorVersion);
+		lua_pushnumber(Li, minorVersion);
+		lua_pushnumber(Li, subVersion);
+
+		/* push the average */
+
+		return 3;
+	}
+#pragma endregion
+
 	void init(int width, int height) {
+
+		clog("loading lua", LOG_NORMAL);
+		L = luaL_newstate();
+
+		clog("loading lua lib", LOG_NORMAL);
+		luaL_openlibs(L);
+		clog("loading lua function", LOG_NORMAL);
+		lua_register(L, "log", LuaLog); //  log(logstring, logtype (normal | warning | error or null)) return : nothing
+		lua_register(L, "getVer", LuagetVer); //  getVer() return : majorVersion, minorVersion, subVersion
+
+		
+			/* get number of arguments */
+		
+		clog("loading finish", LOG_NORMAL);
 		ClearConsole();
 			bool beta = true;
+			
+		
+		
 		ConsolePrint("##########\n", ConsoleAttribute(GREEN));
 		ConsolePrint("#        #\n", ConsoleAttribute(GREEN));
 		ConsolePrint("#  ##### # ", ConsoleAttribute(GREEN));
