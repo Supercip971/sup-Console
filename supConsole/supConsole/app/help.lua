@@ -9,7 +9,7 @@ function help()
 end
 function run()
 
-   log ("help page \n", "null")
+   log ("help page fri \n", "null")
    log (" --- \n", "null")
    log ("programm -info | to get the programm info \n", "null")
    log ("programm -help | to get the programm help \n", "null")

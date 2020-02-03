@@ -2,6 +2,7 @@
 #include "supConsole.hpp"
 #include <string> 
 
+#include "luaUtil.hpp"
 namespace SC {
 	struct vec2
 	{
@@ -81,7 +82,7 @@ namespace SC {
 	void init(int width, int height, std::string* path, char** argv); // init the console
 
 
-
+	void start();
 	// lua Implementation
 	void print_errorLUA(lua_State* state); // error callback for lua
 

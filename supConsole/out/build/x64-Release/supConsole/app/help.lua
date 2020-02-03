@@ -1,5 +1,5 @@
 function ver()
-  log ("help version 0.1", "null")
+  log ("help version 1", "null")
 end
 function info()
   log ("help is for get programm help","null")

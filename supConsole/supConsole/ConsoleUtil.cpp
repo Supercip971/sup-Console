@@ -8,7 +8,9 @@ std::string changeLog = "version 0.1 still in beta"
 		"commit 13 : add lib for lua support "
 	"commit 14 : support for lua with lua {code} function";
 namespace SC {
-	std::string* fPath ;
+	std::string fPath = "null";
+	std::string* args = new std::string[20]{ "null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null" };
+	std::string comargs = "null";
 	lua_State* L;
 	void ConsolePrint(std::string ttoPrint, ConsoleAttribute attribute) {
 #ifdef SYS_WINDOWS 
@@ -20,7 +22,6 @@ namespace SC {
 #endif // SYS_LINUX
 
 	}
-	std::string filePath;
 	void clog(std::string log, logType logtype)
 	{
 
@@ -51,6 +52,12 @@ namespace SC {
 		default:
 			break;
 		}
+	}
+
+	void start() {
+		ConsolePrint(fPath, SC::ConsoleAttribute(SC::ConsolePrintAttribute::BOLD, SC::S_CYAN, SC::BLACK));
+		ConsolePrint(">", SC::ConsoleAttribute(SC::ConsolePrintAttribute::BOLD, SC::GREEN, SC::BLACK));
+		ConsolePrint("", SC::ConsoleAttribute(SC::ConsolePrintAttribute::RESET, SC::WHITE, SC::BLACK));
 	}
 	void process(std::string input)
 	{
@@ -83,15 +90,16 @@ namespace SC {
 
 			commArg.erase(std::remove(commArg.begin(), commArg.end(), '}'), commArg.end());
 			commArg.erase(std::remove(commArg.begin(), commArg.end(), '{'), commArg.end());
-			clog(commArg + " is  commArgument", SC::LOG_NORMAL);
+			input.erase(std::remove(input.begin(), input.end(), '}'), input.end());
+			input.erase(std::remove(input.begin(), input.end(), '{'), input.end()); // used for commarg
+			comargs = commArg;
+		//	clog(commArg + " is  commArgument", SC::LOG_NORMAL);
 		}
 
 
-		input.erase(std::remove(input.begin(), input.end(), '}'), input.end());
-		input.erase(std::remove(input.begin(), input.end(), '{'), input.end()); // used for commarg
+	
 
 		std::istringstream iss(input);
-
 
 		std::string* strList = new std::string[30];
 		for (int i = 0; i < 30; i++)
@@ -109,7 +117,7 @@ namespace SC {
 			if (d.c_str() !="}")
 			{
 
-				clog(std::to_string(argNum) + " is" + d, SC::LOG_NORMAL);
+			//	clog(std::to_string(argNum) + " is" + d, SC::LOG_NORMAL);
 			}
 			argNum++;
 
@@ -138,51 +146,55 @@ namespace SC {
 						if (strList[1] == "-help" )
 						{
 							lua_getglobal(L, "help");
+
+							lua_pcall(L, 0, 0, 0);
 						}
 						else if (strList[1] == "-info" )
 						{
 							lua_getglobal(L, "info");
+
+							lua_pcall(L, 0, 0, 0);
 						}
 						else if (strList[1] == "-version" )
 						{
 							lua_getglobal(L, "ver");
 
+							lua_pcall(L, 0, 0, 0);
+
 						}
 						else
 						{
 							lua_getglobal(L, "run");
-
-							std::string strListtemp = "";
-
-							for (int i = 1; i < numArg-1; ++i) // sorting by alphabetical order
-								for (int j = i + 2; j < numArg; ++j)
-								{
-									if (strList[i] > strList[j])
-									{
-										strListtemp = strList[i];
-										strList[i] = strList[j];
-										strList[j] = strListtemp;
-									}
-								}
 							
+					
 							for (int i = 1; i < numArg; i++)
 							{
-
-								lua_pushstring(L, strList[i].c_str());
+								args[i] = strList[i];
 
 							}
 
-							lua_pcall(L, numArg-1, 0, 0);
+							lua_pcall(L,0, 0, 0);
+
 						}
 					}
 					else
 					{
 
 						lua_getglobal(L, "run");
+						for (int i = 1; i < numArg; i++)
+						{
+							args[i] = "";
+
+						}
 
 						lua_pcall(L, 0, 0, 0);
+
 					}
-					
+					for (int i = 1; i < numArg; i++)
+					{
+						strList[i] = "null";
+
+					}
 					/* the first argument */
 
 					/* the second argument */
@@ -230,15 +242,31 @@ namespace SC {
 	static int getFPath(lua_State* Li) {
 		int n = lua_gettop(Li);
 
-		lua_pushfstring(Li, (*fPath).c_str());
+		lua_pushfstring(Li, (fPath).c_str());
+
+		return 1;
+	}static int getFPathIS(lua_State* Li) { // inverted slash
+		int n = lua_gettop(Li);
+		std::string fpToret = fPath;
+
+
+		std::replace(fpToret.begin(), fpToret.end(), '/', '\\'); // replace all 'x' to 'y'
+		lua_pushfstring(Li, (fpToret).c_str());
+		return 1;
+	}static int getFPathNS(lua_State* Li) { // normal slash
+		int n = lua_gettop(Li);
+		std::string fpToret = fPath;
+
+		std::replace(fpToret.begin(), fpToret.end(), '\\', '/'); // replace all 'x' to 'y'
+		lua_pushfstring(Li, (fpToret).c_str());
 
 		return 1;
 	}
 	static int setFPath(lua_State* Li) {
 
 		int n = lua_gettop(Li);
-		filePath = lua_tostring(Li, 1);
-
+		std::string np = lua_tostring(Li, 1);
+		fPath = np;
 		return 0;
 	}
 	static int  LuagetVer(lua_State* Li)
@@ -255,11 +283,39 @@ namespace SC {
 
 		return 3;
 	}
+	static int  isarg(lua_State* Li)
+	{
+		int n = lua_gettop(Li);
+		bool findit = false;
+		std::string argtofind =lua_tostring(Li, 1);;
+		for (int i = 0; i < 20; i++)
+		{
+			if (args[i] == argtofind)
+			{
+				findit = true;
+			}
+		}
+		lua_pushboolean(Li, findit);
+
+		/* push the average */
+
+		return 1;
+	}
+	static int  getcommarg(lua_State* Li)
+	{
+		int n = lua_gettop(Li);
+		
+		lua_pushfstring(Li, comargs.c_str() );
+
+		/* push the average */
+
+		return 1;
+	}
 #pragma endregion
 
 
 	void init(int width, int height, std::string* path, char** argv) {
-		fPath = path;
+		fPath = *path;
 #ifdef SYS_LINUX
 	
 #endif // SYS_LINUX
@@ -275,12 +331,18 @@ namespace SC {
 		lua_register(L, "log", LuaLog); //  log(logstring, logtype (normal | warning | error or null)) return : nothing | log
 		lua_register(L, "getVer", LuagetVer); //  getVer() return : majorVersion, minorVersion, subVersion | get versions
 		lua_register(L, "getFilePath", getFPath); //  getFilePath() return : current file path | get the current file path
+		lua_register(L, "getFilePathIS", getFPathIS); //  getFilePathI() return : current file path | get the current file path but / are \ 
+		lua_register(L, "getFilePathNS", getFPathNS); //  getFilePathI() return : current file path | get the current file path but \ are /
 		lua_register(L, "setFilePath", setFPath); //  setFilePath(string path) return : nothing | set current file path
-
+		lua_register(L, "getCommarg", getcommarg); //  getCommarg() return : string  | get the comm argument
+		lua_register(L, "isArg", isarg); //  isarg(string arg) return : bool  | get if the 'arg' is in the argument list
+		SC::LU::LoadLUCommand(L);
 		
 			/* get number of arguments */
 		
 		clog("loading finish", LOG_NORMAL);
+
+	
 		ClearConsole();
 			bool beta = true;
 			

@@ -39,16 +39,22 @@ const char* GetPrevDirectoryPath(const char* dirPath)
 
 int main(int argc, char* argv[]) {
 	cout << "the address is: " << argv[0] << endl;
-
+	for (int i = 0; i < 512; i++)
+	{
+		if (argv[0][i] == '\\' )
+		{
+			argv[0][i] = '/';
+		}
+	}
 	std::string fpath = GetPrevDirectoryPath(argv[0]);
 	SC::init(0, 0, &fpath, argv);
 	ConsolePrint("", SC::ConsoleAttribute(SC::ConsolePrintAttribute::RESET, SC::WHITE, SC::BLACK));
 	while (true)
 	{
-		std::string input ;
-		ConsolePrint(fpath, SC::ConsoleAttribute(SC::ConsolePrintAttribute::BOLD, SC::S_CYAN, SC::BLACK));
-		ConsolePrint(">", SC::ConsoleAttribute(SC::ConsolePrintAttribute::BOLD, SC::GREEN, SC::BLACK));
-		ConsolePrint("", SC::ConsoleAttribute(SC::ConsolePrintAttribute::RESET, SC::WHITE, SC::BLACK));
+		SC::start();
+
+
+		std::string input;
 		char s[1000];
 		fgets(s, 1000, stdin);
 		input = s;
