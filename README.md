@@ -7,7 +7,7 @@ It support linux and windows.
 
 > Sample Pic : 
 
-![sample picture](https://www.casimages.com/i/200203081344958140.png.html)
+![sample picture](https://nsa40.casimages.com/img/2020/02/03/200203081344958140.png)
 
 
 
