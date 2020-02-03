@@ -3,7 +3,8 @@
 #endif
 
 #if defined(__18CXX)
-# define ID_VOID_MAIN
+# define ID_VOID_
+
 #endif
 #if defined(__CLASSIC_C__)
 /* cv-qualifiers did not exist in K&R C */

@@ -78,7 +78,7 @@ namespace SC {
 
 	void process(std::string input); // process the input
 	void Close();
-	void init(int width, int height, std::string* path); // init the console
+	void init(int width, int height, std::string* path, char** argv); // init the console
 
 
 

@@ -76,3 +76,5 @@
 860	1059	602375219	supConsole/supConsole.exe	1f562c1a88b976c8
 1	731	602375473	supConsole/CMakeFiles/supConsole.dir/ConsoleUtil.cpp.obj	b9e63690c41ee9be
 732	1116	602375474	supConsole/supConsole.exe	1f562c1a88b976c8
+23	894	602445507	supConsole/CMakeFiles/supConsole.dir/lib/lua/luac.c.obj	3f8acbefd0213a4
+18	943	602445507	supConsole/CMakeFiles/supConsole.dir/lib/lua/lua.c.obj	bcc79904222a4aaa

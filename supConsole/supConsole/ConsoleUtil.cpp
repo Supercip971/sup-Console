@@ -11,9 +11,14 @@ namespace SC {
 	std::string* fPath ;
 	lua_State* L;
 	void ConsolePrint(std::string ttoPrint, ConsoleAttribute attribute) {
-#ifdef SYS_WINDOWS or SYS_LINUX
+#ifdef SYS_WINDOWS 
 		std::cout << attribute.AttribToString() << ttoPrint  ;
 #endif // SYS_WINDOWS
+#ifdef SYS_LINUX
+		//snprintf((attribute.AttribToString() + ttoPrint),)
+		printf("%s %s", attribute.AttribToString().c_str(), ttoPrint.c_str());
+#endif // SYS_LINUX
+
 	}
 	std::string filePath;
 	void clog(std::string log, logType logtype)
@@ -252,8 +257,15 @@ namespace SC {
 	}
 #pragma endregion
 
-	void init(int width, int height, std::string* path) {
+
+	void init(int width, int height, std::string* path, char** argv) {
 		fPath = path;
+#ifdef SYS_LINUX
+	
+#endif // SYS_LINUX
+
+
+
 		clog("loading lua", LOG_NORMAL);
 		L = luaL_newstate();
 
