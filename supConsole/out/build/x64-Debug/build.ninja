@@ -66,10 +66,276 @@ build rebuild_cache: phony CMakeFiles\rebuild_cache.util
 
 build cmake_object_order_depends_target_supConsole: phony || supConsole\CMakeFiles\supConsole.dir
 
-build supConsole\CMakeFiles\supConsole.dir\supConsole.cpp.obj: CXX_COMPILER__supConsole ..\..\..\supConsole\supConsole.cpp || cmake_object_order_depends_target_supConsole
+build supConsole\CMakeFiles\supConsole.dir\main.cpp.obj: CXX_COMPILER__supConsole ..\..\..\supConsole\main.cpp || cmake_object_order_depends_target_supConsole
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
   OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\ConsoleUtil.cpp.obj: CXX_COMPILER__supConsole ..\..\..\supConsole\ConsoleUtil.cpp || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\ConsoleAttrib.cpp.obj: CXX_COMPILER__supConsole ..\..\..\supConsole\ConsoleAttrib.cpp || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\luaSC.cpp.obj: CXX_COMPILER__supConsole ..\..\..\supConsole\luaSC.cpp || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lapi.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lapi.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lauxlib.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lauxlib.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lbaselib.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lbaselib.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lbitlib.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lbitlib.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lcode.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lcode.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lcorolib.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lcorolib.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lctype.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lctype.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\ldblib.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\ldblib.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\ldebug.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\ldebug.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\ldo.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\ldo.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\ldump.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\ldump.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lfunc.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lfunc.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lgc.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lgc.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\linit.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\linit.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\liolib.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\liolib.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\llex.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\llex.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lmathlib.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lmathlib.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lmem.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lmem.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\loadlib.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\loadlib.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lobject.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lobject.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lopcodes.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lopcodes.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\loslib.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\loslib.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lparser.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lparser.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lstate.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lstate.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lstring.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lstring.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lstrlib.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lstrlib.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\ltable.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\ltable.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\ltablib.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\ltablib.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\ltm.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\ltm.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lua.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lua.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\luac.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\luac.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lundump.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lundump.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lutf8lib.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lutf8lib.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lvm.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lvm.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
+  TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
+  TARGET_PDB = supConsole\supConsole.pdb
+
+build supConsole\CMakeFiles\supConsole.dir\lib\lua\lzio.c.obj: C_COMPILER__supConsole ..\..\..\supConsole\lib\lua\lzio.c || cmake_object_order_depends_target_supConsole
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /MDd /Zi /Ob0 /Od /RTC1
+  OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
+  OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir\lib\lua
   TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
   TARGET_PDB = supConsole\supConsole.pdb
 
@@ -81,12 +347,12 @@ build supConsole\CMakeFiles\supConsole.dir\supConsole.cpp.obj: CXX_COMPILER__sup
 #############################################
 # Link the executable supConsole\supConsole.exe
 
-build supConsole\supConsole.exe: CXX_EXECUTABLE_LINKER__supConsole supConsole\CMakeFiles\supConsole.dir\supConsole.cpp.obj
+build supConsole\supConsole.exe: CXX_EXECUTABLE_LINKER__supConsole supConsole\CMakeFiles\supConsole.dir\main.cpp.obj supConsole\CMakeFiles\supConsole.dir\ConsoleUtil.cpp.obj supConsole\CMakeFiles\supConsole.dir\ConsoleAttrib.cpp.obj supConsole\CMakeFiles\supConsole.dir\luaSC.cpp.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lapi.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lauxlib.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lbaselib.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lbitlib.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lcode.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lcorolib.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lctype.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\ldblib.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\ldebug.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\ldo.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\ldump.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lfunc.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lgc.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\linit.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\liolib.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\llex.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lmathlib.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lmem.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\loadlib.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lobject.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lopcodes.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\loslib.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lparser.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lstate.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lstring.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lstrlib.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\ltable.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\ltablib.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\ltm.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lua.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\luac.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lundump.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lutf8lib.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lvm.c.obj supConsole\CMakeFiles\supConsole.dir\lib\lua\lzio.c.obj
   FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib
   OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
-  POST_BUILD = cd .
+  POST_BUILD = cmd.exe /C "cd /D D:\source\supConsole\sup-Console\supConsole\out\build\x64-Debug\supConsole && "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E copy D:/source/supConsole/sup-Console/supConsole/app D:/source/supConsole/sup-Console/supConsole/out/build/x64-Debug/supConsole/app"
   PRE_LINK = cd .
   TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
   TARGET_FILE = supConsole\supConsole.exe

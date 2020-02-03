@@ -34,7 +34,7 @@ namespace SC {
             return;
         }
 
-        // Finally, execute the program by calling into it.
+        // Finally,e execute the program by calling into it.
         // Change the arguments if you're not running vanilla Lua code.
 
         result = lua_pcall(state, 0, LUA_MULTRET, 0);
