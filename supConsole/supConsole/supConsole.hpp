@@ -4,7 +4,7 @@
   // system support
  //#define SYS_LINUX 
 
-#define SYS_WINDOWS
+#define SYS_LINUX
 #ifdef SYS_LINUX
 #include <sys/ioctl.h> // use for get width and get height
 #include <cstring>
@@ -17,9 +17,9 @@
 #include <windows.h>
 #endif // SYS_WINDOWS
 
-
 #include <stdlib.h>
 
+#include <sys/stat.h>
 
 #include <algorithm>
 

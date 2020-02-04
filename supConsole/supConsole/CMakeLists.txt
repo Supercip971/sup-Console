@@ -15,6 +15,6 @@ file(GLOB luad
     "app/*.lua"
 )
 
-add_executable (supConsole "main.cpp" "supConsole.hpp" "ConsoleUtil.hpp" "ConsoleUtil.cpp" "ConsoleAttrib.cpp" "luaSC.cpp" ${ldd})
+add_executable (supConsole "main.cpp" "supConsole.hpp" "ConsoleUtil.hpp" "ConsoleUtil.cpp" "ConsoleAttrib.cpp" "luaSC.cpp" "luaUtil.cpp" "luaUtil.hpp" ${ldd})
 
 # TODO: Ajoutez des tests et installez des cibles si nécessaire.

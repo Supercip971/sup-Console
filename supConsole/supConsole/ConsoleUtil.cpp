@@ -18,7 +18,7 @@ namespace SC {
 #endif // SYS_WINDOWS
 #ifdef SYS_LINUX
 		//snprintf((attribute.AttribToString() + ttoPrint),)
-		printf("%s %s", attribute.AttribToString().c_str(), ttoPrint.c_str());
+		printf("%s%s", attribute.AttribToString().c_str(), ttoPrint.c_str());
 #endif // SYS_LINUX
 
 	}

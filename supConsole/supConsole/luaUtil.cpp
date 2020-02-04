@@ -17,11 +17,11 @@ namespace SC {
 			std::string np = lua_tostring(Li, 1);
 
 
-			struct stat info;
+			 struct stat info ;
 			bool direxist = false;
 			if (stat(np.c_str(), &info) != 0)
 				direxist = false;
-			else if (info.st_mode & S_IFDIR)
+			else if (info.st_mode & 0x4000)
 				direxist = true;
 			else
 				direxist = false;
