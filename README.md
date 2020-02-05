@@ -13,3 +13,8 @@ It support linux and windows.
 
 
 
+
+note you have to install git for app update
+console app are in this repo : https://github.com/Supercip971/Sup-Console-APP/
+
+
