@@ -9,6 +9,7 @@ std::string changeLog = "version 0.1 still in beta"
 	"commit 14 : support for lua with lua {code} function"; // changelog not updated (used for major release
 namespace SC {
 	std::string fPath = "null";
+	std::string sourcefPath = "null";
 	std::string* args = new std::string[20]{ "null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null" }; // max 20 argument :(
 	std::string comargs = "null";
 	lua_State* L;
@@ -24,6 +25,9 @@ namespace SC {
 #endif // SYS_LINUX
 
 	}
+
+	
+
 	void clog(std::string log, logType logtype)
 	{
 
@@ -122,11 +126,57 @@ namespace SC {
 			{
 				luaInterp(commArg);
 			}
+			else if (strList[0] == "update" && isCommarg == false)
+			{
+				clog("do you want to update app ? you have to install git on your computer. type 'y' to update app", logType::LOG_WARNING);
+				std::string input;
 
+				char* s = new char[1000];
+				fgets(s, 1000, stdin);
+				input = s;
+				if (input[0] == 'y')
+				{
+					clog("starting update...", logType::LOG_NORMAL);
+
+					clog("starting git...", logType::LOG_NORMAL);
+
+					system("git clone https://github.com/Supercip971/Sup-Console-APP.git");
+				}
+				else
+				{
+					clog("cancelling update...", logType::LOG_NORMAL);
+				}
+			}
+			else if (strList[0] == "install" && isCommarg == false)
+			{
+
+				clog("do you want to install app "+strList[1]+ "? you have to install git on your computer. type 'y' to install app", logType::LOG_WARNING);
+				std::string input;
+
+				char* s = new char[1000];
+				fgets(s, 1000, stdin);
+				input = s;
+				if (input[0] == 'y')
+				{
+					clog("install is not supported for the moment sorry", logType::LOG_ERROR);
+				}
+				else
+				{
+					clog("cancelling install...", logType::LOG_NORMAL);
+				}
+			}
 			else
 			{
-				if (luaL_dofile(L, ("app/" + strList[0] + ".lua").c_str())) {
-					clog(lua_tostring(L, -1) , SC::LOG_LUA_ERROR);
+				std::string errorPrevious = "";
+				if (luaL_dofile(L, ("Sup-Console-APP/" + strList[0] + ".lua").c_str())) {
+					errorPrevious = lua_tostring(L, -1);
+					if (luaL_dofile(L, ("Sup-Console-USER-APP/" + strList[0] + ".lua").c_str()))
+					{
+
+						clog(lua_tostring(L, -1), SC::LOG_LUA_ERROR);
+						clog("and", SC::LOG_LUA_ERROR);
+						clog(errorPrevious, SC::LOG_LUA_ERROR);
+					}
 				}
 				else
 				{
@@ -376,6 +426,7 @@ namespace SC {
 
 	void init(int width, int height, std::string* path, char** argv) {
 		fPath = *path;
+		sourcefPath = fPath;
 #ifdef SYS_LINUX
 	
 #endif // SYS_LINUX
@@ -450,7 +501,17 @@ namespace SC {
 
 	void setConsCurPos(vec2 p)
 	{
-		printf(std::string("\033["+std::to_string(int(p.x) + 1) + ";" + std::to_string(int(p.y) + 1) + "H").c_str());	
+		if (p.x == -1)
+		{
+			printf(std::string("\033[;" + std::to_string(int(p.y) + 1) + "H").c_str());
+		}else if (p.y == -1)
+		{
+			printf(std::string("\033[" + std::to_string(int(p.x) + 1) + "G").c_str());
+		}else
+		{
+			printf(std::string("\033[" + std::to_string(int(p.x) + 1) + ";" + std::to_string(int(p.y) + 1) + "H").c_str());
+		}
+			
 	}
 
 	void ClearConsole()

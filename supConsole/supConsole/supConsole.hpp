@@ -5,6 +5,7 @@
  //#define SYS_LINUX 
     // When you build on windows you define SYS_WINDOWS and if you build for linux you define SYS_LINUX (only ubuntu is supported)
 #define SYS_WINDOWS
+#define _SILENCE_EXPERIMENTAL_FILESYSTEM_DEPRECATION_WARNING
 #ifdef SYS_LINUX
 
 
@@ -30,7 +31,10 @@
 #include <stdio.h>
 #include <sstream>
 
-
+#include <iomanip>
+#include <iostream>
+#include <experimental/filesystem>
+#include <fstream>
 
 extern "C" {
 #include "lib/lua/lua.h"
@@ -39,5 +43,3 @@ extern "C" {
 }
 
 #include "ConsoleUtil.hpp"
-#include <iostream>
-#include <iomanip>
