@@ -217,7 +217,97 @@ namespace SC {
 		}
 		return 0;
 	}
+	static int  setStyle(lua_State* Li)
+	{
+		int n = lua_gettop(Li);
 
+
+		std::string fcolor = lua_tostring(Li, 1);
+		std::string bcolor = lua_tostring(Li, 2);
+		std::string type = lua_tostring(Li, 3);
+		SC::ConsoleCol fcolorA = SC::ConsoleCol::WHITE;
+		SC::ConsoleCol bcolorA = SC::ConsoleCol::BLACK;
+		SC::ConsolePrintAttribute attribA = SC::ConsolePrintAttribute::NULLT;
+					// can't do switch on string >:(
+#pragma region ForGroundColor
+		if (fcolor == "white")
+			fcolorA = SC::ConsoleCol::WHITE;
+		else if (fcolor == "black")
+			fcolorA = SC::ConsoleCol::BLACK;
+		else if (fcolor == "blue")
+			fcolorA = SC::ConsoleCol::BLUE;
+		else if (fcolor == "sblue")
+			fcolorA = SC::ConsoleCol::S_BLUE;
+		else if (fcolor == "cyan")
+			fcolorA = SC::ConsoleCol::CYAN;
+		else if (fcolor == "scyan")
+			fcolorA = SC::ConsoleCol::S_CYAN;
+		else if (fcolor == "green")
+			fcolorA = SC::ConsoleCol::GREEN;
+		else if (fcolor == "sgreen")
+			fcolorA = SC::ConsoleCol::S_GREEN;
+		else if (fcolor == "magenta")
+			fcolorA = SC::ConsoleCol::MAGENTA;
+		else if (fcolor == "smagenta")
+			fcolorA = SC::ConsoleCol::S_MAGENTA;
+		else if (fcolor == "red")
+			fcolorA = SC::ConsoleCol::RED;
+		else if (fcolor == "sred")
+			fcolorA = SC::ConsoleCol::S_RED;
+		else if (fcolor == "yellow")
+			fcolorA = SC::ConsoleCol::YELLOW;
+		else if (fcolor == "syellow")
+			fcolorA = SC::ConsoleCol::S_YELLOW;
+#pragma endregion
+#pragma region Background
+
+
+		if (bcolor == "white")
+			bcolorA = SC::ConsoleCol::WHITE;
+		else if (bcolor == "black")
+			bcolorA = SC::ConsoleCol::BLACK;
+		else if (bcolor == "blue")
+			bcolorA = SC::ConsoleCol::BLUE;
+		else if (bcolor == "sblue")
+			bcolorA = SC::ConsoleCol::S_BLUE;
+		else if (bcolor == "cyan")
+			bcolorA = SC::ConsoleCol::CYAN;
+		else if (bcolor == "scyan")
+			bcolorA = SC::ConsoleCol::S_CYAN;
+		else if (bcolor == "green")
+			bcolorA = SC::ConsoleCol::GREEN;
+		else if (bcolor == "sgreen")
+			bcolorA = SC::ConsoleCol::S_GREEN;
+		else if (bcolor == "magenta")
+			bcolorA = SC::ConsoleCol::MAGENTA;
+		else if (bcolor == "smagenta")
+			bcolorA = SC::ConsoleCol::S_MAGENTA;
+		else if (bcolor == "red")
+			bcolorA = SC::ConsoleCol::RED;
+		else if (bcolor == "sred")
+			bcolorA = SC::ConsoleCol::S_RED;
+		else if (bcolor == "yellow")
+			bcolorA = SC::ConsoleCol::YELLOW;
+		else if (bcolor == "syellow")
+			bcolorA = SC::ConsoleCol::S_YELLOW;
+	
+
+#pragma endregion
+#pragma region Type
+		if (type == "underline")
+			attribA = SC::ConsolePrintAttribute::UNDERLINE;
+		else if (type == "bold")
+			attribA = SC::ConsolePrintAttribute::BOLD;
+		else if (type == "inverse")
+			attribA = SC::ConsolePrintAttribute::INVERSE;
+		else if (type == "reset")
+			attribA = SC::ConsolePrintAttribute::RESET;
+#pragma endregion
+
+		SC::ConsoleAttribute CA(attribA, fcolorA, bcolorA);
+		SC::ConsolePrint("", CA);
+		return 0;
+	}
 	static int getFPath(lua_State* Li) { // get path
 		int n = lua_gettop(Li);
 		lua_pushfstring(Li, (fPath).c_str());
@@ -304,6 +394,7 @@ namespace SC {
 		lua_register(L, "setFilePath", setFPath); //  setFilePath(string path) return : nothing | set current file path
 		lua_register(L, "getCommarg", getcommarg); //  getCommarg() return : string  | get the comm argument
 		lua_register(L, "isArg", isarg); //  isarg(string arg) return : bool  | get if the 'arg' is in the argument list
+		lua_register(L, "setStyle", setStyle); //  setStyle(foregroundCol, backgroundColor, type) return : bool  | get if the 'arg' is in the argument list
 		SC::LU::LoadLUCommand(L);
 		
 

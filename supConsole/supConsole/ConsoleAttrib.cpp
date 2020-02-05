@@ -34,7 +34,16 @@ namespace SC {
 	{
 
 		std::string str;
-		str = "\x1B[" + std::to_string(CAcpa) + ";" + std::to_string(CAccf) + ";" + std::to_string(CAccb + 10) + "m";
+		if (CAcpa != ConsolePrintAttribute::NULLT)
+		{
+			str = "\x1B[" + std::to_string(CAcpa) + ";" + std::to_string(CAccf) + ";" + std::to_string(CAccb + 10) + "m";
+
+		}
+		else
+		{
+			str = "\x1B["  + std::to_string(CAccf) + ";" + std::to_string(CAccb + 10) + "m";
+
+		}
 		return str;
 	}
 }

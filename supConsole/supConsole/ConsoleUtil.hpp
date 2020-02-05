@@ -15,6 +15,7 @@ namespace SC {
 		BOLD = 1, 
 		UNDERLINE = 4,
 		INVERSE = 7,
+		NULLT = -1,
 	};
 	enum ConsoleCol {
 		BLACK = 30,
