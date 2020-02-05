@@ -43,7 +43,7 @@ namespace SC {
             print_errorLUA(state);
             return;
         }
-    }
+    } // execute lua code (without included function)
 	void luaInterp(std::string cmd) {
 		
         executeLUA(cmd);

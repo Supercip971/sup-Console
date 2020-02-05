@@ -2,16 +2,18 @@
 
 int MajorVersion = 0;
 int minorVersion = 1;
-int subVersion = 27; // for change id (+1 for every commit in github)
+int subVersion = 29; // for change id (+1 for every commit in github)
 std::string changeLog = "version 0.1 still in beta"
 		"commit 12 : add changelog and update how subVersion is calc"
 		"commit 13 : add lib for lua support "
-	"commit 14 : support for lua with lua {code} function";
+	"commit 14 : support for lua with lua {code} function"; // changelog not updated (used for major release
 namespace SC {
 	std::string fPath = "null";
-	std::string* args = new std::string[20]{ "null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null" };
+	std::string* args = new std::string[20]{ "null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null" }; // max 20 argument :(
 	std::string comargs = "null";
 	lua_State* L;
+
+	bool beta = true;
 	void ConsolePrint(std::string ttoPrint, ConsoleAttribute attribute) {
 #ifdef SYS_WINDOWS 
 		std::cout << attribute.AttribToString() << ttoPrint  ;
@@ -32,19 +34,20 @@ namespace SC {
 			ConsolePrint("[LOG] : ", SC::ConsoleAttribute(ConsoleCol::GREEN));
 			ConsolePrint(log + "\n", SC::ConsoleAttribute(ConsoleCol::WHITE));
 			break;
+		
 		case SC::LOG_WARNING:
 			ConsolePrint("", SC::ConsoleAttribute(ConsolePrintAttribute::RESET));
 			ConsolePrint("[WARNING] : ", SC::ConsoleAttribute(ConsoleCol::YELLOW));
 			ConsolePrint(log + "\n", SC::ConsoleAttribute(ConsoleCol::WHITE));
 			break;
+		
 		case SC::LOG_ERROR:
 			ConsolePrint("", SC::ConsoleAttribute(ConsolePrintAttribute::RESET));
 			ConsolePrint("[ERROR] : ", SC::ConsoleAttribute(ConsoleCol::RED));
 			ConsolePrint(log + "\n", SC::ConsoleAttribute(ConsoleCol::WHITE));
 			break;
+
 		case SC::LOG_LUA_ERROR:
-
-
 			ConsolePrint("", SC::ConsoleAttribute(ConsolePrintAttribute::RESET));
 			ConsolePrint("[LUA ERROR] : ", SC::ConsoleAttribute(ConsoleCol::S_MAGENTA));
 			ConsolePrint(log + "\n", SC::ConsoleAttribute(ConsoleCol::WHITE));
@@ -59,6 +62,7 @@ namespace SC {
 		ConsolePrint(">", SC::ConsoleAttribute(SC::ConsolePrintAttribute::BOLD, SC::GREEN, SC::BLACK));
 		ConsolePrint("", SC::ConsoleAttribute(SC::ConsolePrintAttribute::RESET, SC::WHITE, SC::BLACK));
 	}
+
 	void process(std::string input)
 	{
 
@@ -69,6 +73,9 @@ namespace SC {
 		std::string commArg = "";
 		int first = input.find('{');
 		int last = input.find('}');
+
+		std::string* strList = new std::string[30];
+		int numArg = 0;
 		if (first != -1)
 		{
 			if (last != -1)
@@ -100,29 +107,17 @@ namespace SC {
 	
 
 		std::istringstream iss(input);
-
-		std::string* strList = new std::string[30];
 		for (int i = 0; i < 30; i++)
 		{
 			strList[i] = "";
 		}
-		int numArg = 0;
+
 		while (iss >> d) {
 			strList[numArg] = d;
-			numArg++;
-			if (argNum == 0)
-			{
-				
-			}
-			if (d.c_str() !="}")
-			{
-
-			//	clog(std::to_string(argNum) + " is" + d, SC::LOG_NORMAL);
-			}
-			argNum++;
+			++numArg;
+			++argNum;
 
 		}
-		clog(std::to_string(numArg) + " number of arg", SC::LOG_NORMAL);
 			if (strList[0] == "lua" && isCommarg == true)
 			{
 				luaInterp(commArg);
@@ -130,12 +125,8 @@ namespace SC {
 
 			else
 			{
-
 				if (luaL_dofile(L, ("app/" + strList[0] + ".lua").c_str())) {
-
 					clog(lua_tostring(L, -1) , SC::LOG_LUA_ERROR);
-
-
 				}
 				else
 				{
@@ -143,36 +134,29 @@ namespace SC {
 
 					if (numArg > 1)
 					{
+						 // we can not do switch on string :(
 						if (strList[1] == "-help" )
 						{
 							lua_getglobal(L, "help");
-
 							lua_pcall(L, 0, 0, 0);
 						}
 						else if (strList[1] == "-info" )
 						{
 							lua_getglobal(L, "info");
-
 							lua_pcall(L, 0, 0, 0);
 						}
 						else if (strList[1] == "-version" )
 						{
 							lua_getglobal(L, "ver");
-
 							lua_pcall(L, 0, 0, 0);
-
 						}
 						else
 						{
 							lua_getglobal(L, "run");
-							
-					
 							for (int i = 1; i < numArg; i++)
 							{
 								args[i] = strList[i];
-
 							}
-
 							lua_pcall(L,0, 0, 0);
 
 						}
@@ -193,15 +177,12 @@ namespace SC {
 					for (int i = 1; i < numArg; i++)
 					{
 						strList[i] = "null";
-
+						 // reset
 					}
-					/* the first argument */
-
-					/* the second argument */
 
 				}
 			}
-			delete[] strList;
+			delete[] strList; // delete
 		
 	}
 
@@ -211,14 +192,14 @@ namespace SC {
 	}
 
 #pragma region luaFunc
-
+	// all important lua function
 	static int  LuaLog(lua_State* Li)
 	{
 		int n = lua_gettop(Li);
 
 		
 		std::string str = lua_tostring(Li, 1);
-		std::string type= lua_tostring(Li, 2);
+		std::string type= lua_tostring(Li, 2); 
 		if (type == "error")
 		{
 			clog(str, LOG_ERROR);
@@ -233,35 +214,32 @@ namespace SC {
 		else
 		{
 			ConsolePrint(str, SC::ConsoleAttribute(ConsolePrintAttribute::RESET));
-
 		}
-
 		return 0;
 	}
 
-	static int getFPath(lua_State* Li) {
+	static int getFPath(lua_State* Li) { // get path
 		int n = lua_gettop(Li);
-
 		lua_pushfstring(Li, (fPath).c_str());
-
 		return 1;
-	}static int getFPathIS(lua_State* Li) { // inverted slash
+	}
+	
+	static int getFPathIS(lua_State* Li) { // inverted slash
 		int n = lua_gettop(Li);
 		std::string fpToret = fPath;
-
-
 		std::replace(fpToret.begin(), fpToret.end(), '/', '\\'); // replace all 'x' to 'y'
 		lua_pushfstring(Li, (fpToret).c_str());
 		return 1;
-	}static int getFPathNS(lua_State* Li) { // normal slash
+	}
+	
+	static int getFPathNS(lua_State* Li) { // normal slash
 		int n = lua_gettop(Li);
 		std::string fpToret = fPath;
-
 		std::replace(fpToret.begin(), fpToret.end(), '\\', '/'); // replace all 'x' to 'y'
 		lua_pushfstring(Li, (fpToret).c_str());
-
 		return 1;
 	}
+	
 	static int setFPath(lua_State* Li) {
 
 		int n = lua_gettop(Li);
@@ -269,20 +247,16 @@ namespace SC {
 		fPath = np;
 		return 0;
 	}
+	
 	static int  LuagetVer(lua_State* Li)
 	{
 		int n = lua_gettop(Li);
-
-
-
 		lua_pushnumber(Li, MajorVersion);
 		lua_pushnumber(Li, minorVersion);
 		lua_pushnumber(Li, subVersion);
-
-		/* push the average */
-
 		return 3;
 	}
+	
 	static int  isarg(lua_State* Li)
 	{
 		int n = lua_gettop(Li);
@@ -297,17 +271,13 @@ namespace SC {
 		}
 		lua_pushboolean(Li, findit);
 
-		/* push the average */
-
 		return 1;
 	}
+	
 	static int  getcommarg(lua_State* Li)
 	{
 		int n = lua_gettop(Li);
-		
 		lua_pushfstring(Li, comargs.c_str() );
-
-		/* push the average */
 
 		return 1;
 	}
@@ -319,14 +289,12 @@ namespace SC {
 #ifdef SYS_LINUX
 	
 #endif // SYS_LINUX
-
-
-
 		clog("loading lua", LOG_NORMAL);
 		L = luaL_newstate();
 
 		clog("loading lua lib", LOG_NORMAL);
 		luaL_openlibs(L);
+
 		clog("loading lua function", LOG_NORMAL);
 		lua_register(L, "log", LuaLog); //  log(logstring, logtype (normal | warning | error or null)) return : nothing | log
 		lua_register(L, "getVer", LuagetVer); //  getVer() return : majorVersion, minorVersion, subVersion | get versions
@@ -338,13 +306,12 @@ namespace SC {
 		lua_register(L, "isArg", isarg); //  isarg(string arg) return : bool  | get if the 'arg' is in the argument list
 		SC::LU::LoadLUCommand(L);
 		
-			/* get number of arguments */
+
 		
 		clog("loading finish", LOG_NORMAL);
 
 	
 		ClearConsole();
-			bool beta = true;
 			
 		
 		
@@ -356,19 +323,15 @@ namespace SC {
 
 		ConsolePrint("# ##     # ", ConsoleAttribute(GREEN));
 		if (beta)
-		{
 			ConsolePrint("version : [BETA] " + std::to_string(MajorVersion) + "." + std::to_string(minorVersion) + "       edition : " + std::to_string(subVersion) + "\n", ConsoleAttribute(S_CYAN));
-		}
 		else
-		{
 			ConsolePrint("version : " + std::to_string(MajorVersion) + "." + std::to_string(minorVersion) + "       edition : " + std::to_string(subVersion) + "\n", ConsoleAttribute(S_CYAN));
-		}
+		
 		ConsolePrint("#  ####  #\n", ConsoleAttribute(GREEN));
 		ConsolePrint("#     ## #\n", ConsoleAttribute(GREEN));
 		ConsolePrint("# #####  #\n", ConsoleAttribute(GREEN));
 		ConsolePrint("#        #\n", ConsoleAttribute(GREEN));
 		ConsolePrint("########## \n", ConsoleAttribute(GREEN));
-		
 	}
 
 
@@ -384,23 +347,19 @@ namespace SC {
 		size.y = (float) w.ws_row;
 		size.x = (float) w.ws_col;
 #endif // SYS_LINUX
+		
 #ifdef SYS_WINDOWS
 		CONSOLE_SCREEN_BUFFER_INFO csbi;
 		GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
 		size.x = csbi.srWindow.Right - csbi.srWindow.Left + 1;
 		size.y = csbi.srWindow.Bottom - csbi.srWindow.Top + 1;
-
-
 #endif // SYS_WINDOWS
-
 		return size;
 	}
 
 	void setConsCurPos(vec2 p)
 	{
-	
-			printf(std::string("\033["+std::to_string(int(p.x) + 1) + ";" + std::to_string(int(p.y) + 1) + "H").c_str());
-			
+		printf(std::string("\033["+std::to_string(int(p.x) + 1) + ";" + std::to_string(int(p.y) + 1) + "H").c_str());	
 	}
 
 	void ClearConsole()

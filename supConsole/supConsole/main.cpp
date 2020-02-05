@@ -3,18 +3,6 @@
 
 #include "supConsole.hpp"
 
-using namespace std;
-class Console
-{
-public:
-
-	std::string cons;
-
-	
-
-private:
-
-};
 
 const char* GetPrevDirectoryPath(const char* dirPath)
 {
@@ -38,32 +26,35 @@ const char* GetPrevDirectoryPath(const char* dirPath)
 }
 
 int main(int argc, char* argv[]) {
-	cout << "the address is: " << argv[0] << endl;
 	for (int i = 0; i < 512; i++)
 	{
 		if (argv[0][i] == '\\' )
 		{
 			argv[0][i] = '/';
 		}
-	}
-	std::string fpath = GetPrevDirectoryPath(argv[0]);
-	SC::init(0, 0, &fpath, argv);
-	ConsolePrint("", SC::ConsoleAttribute(SC::ConsolePrintAttribute::RESET, SC::WHITE, SC::BLACK));
-	while (true)
+	} // change the address 
+	std::string fpath = GetPrevDirectoryPath(argv[0]); // argv[0] is the executable path so we want to get the folder path no the executable 
+	SC::init(0, 0, &fpath, argv); // init the console
+	ConsolePrint("", SC::ConsoleAttribute(SC::ConsolePrintAttribute::RESET, SC::WHITE, SC::BLACK)); // reset
+
+
+	while (true) // main loop, to do create a exit function
 	{
 		SC::start();
 
-
 		std::string input;
-		char s[1000];
+
+		char* s = new char[1000];
 		fgets(s, 1000, stdin);
 		input = s;
 		
 		SC::process(input);
 
+		delete[] s;
+
 	}
 
 
-	SC::Close();
+	SC::Close(); 
 	return 0;
 }
