@@ -171,7 +171,7 @@ namespace SC {
 				std::string errorPrevious = "";
 				if (luaL_dofile(L, ("Sup-Console-APP/" + strList[0] + ".lua").c_str())) {
 					errorPrevious = lua_tostring(L, -1);
-					if (luaL_dofile(L, ("Sup-Console-USER-APP/" + strList[0] + ".lua").c_str()))
+					if (luaL_dofile(L, ("Sup-Console-USER-APP/" + strList[0] + "/"+ "main.lua").c_str())) // CHANGE HOW TO GET AN APP
 					{
 
 						clog(lua_tostring(L, -1), SC::LOG_LUA_ERROR);
@@ -422,6 +422,15 @@ namespace SC {
 
 		return 1;
 	}
+
+	static int  processF(lua_State* Li) // process a function
+	{
+		int n = lua_gettop(Li);
+
+		std::string procc = lua_tostring(Li, 1);;
+		process(procc);
+		return 0;
+	}
 #pragma endregion
 
 
@@ -447,6 +456,7 @@ namespace SC {
 		lua_register(L, "getCommarg", getcommarg); //  getCommarg() return : string  | get the comm argument
 		lua_register(L, "isArg", isarg); //  isarg(string arg) return : bool  | get if the 'arg' is in the argument list
 		lua_register(L, "setStyle", setStyle); //  setStyle(foregroundCol, backgroundColor, type) return : bool  | get if the 'arg' is in the argument list
+		lua_register(L, "process", processF); //  process(string command) return : nothing  | proccess a command in the console
 		SC::LU::LoadLUCommand(L);
 		
 
