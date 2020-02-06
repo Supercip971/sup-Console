@@ -455,14 +455,14 @@ namespace SC {
 
 	
 		ClearConsole();
-		std::string OO ="" ;
-		OO += 219; 
-		std::string OSG = ""; // object small gradient ▓
-		OSG += 178;
-		std::string ONG = ""; // object normal gradient ▒
-		ONG += 177;
-		std::string OBG = ""; // object big gradient ░
-		OBG += 176;
+		std::string OO ="_" ;
+		OO = 219; 
+		std::string OSG = "_"; // object semall gradient ▓
+		OSG = 178;
+		std::string ONG = "_"; // object normal gradient ▒
+		ONG = 177;
+		std::string OBG = "_"; // object big gradient ░
+		OBG = 176;
 		char ii = ' ';
 		int Logo[9][9] = {
 			{0,0,0,1,1,1,0,0,0},

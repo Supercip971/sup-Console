@@ -44,6 +44,16 @@ rule CXX_COMPILER__supConsole
 
 
 #############################################
+# Rule for compiling RC files.
+
+rule RC_COMPILER__supConsole
+  depfile = $DEP_FILE
+  deps = gcc
+  command = "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmcldeps.exe" RC $in $DEP_FILE $out "Remarque : inclusion du fichier :  " "C:/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.24.28314/bin/HostX64/x64/cl.exe" C:\PROGRA~2\WI3CF2~1\10\bin\100183~1.0\x64\rc.exe $DEFINES $INCLUDES $FLAGS /fo $out $in
+  description = Building RC object $out
+
+
+#############################################
 # Rule for linking CXX executable.
 
 rule CXX_EXECUTABLE_LINKER__supConsole
