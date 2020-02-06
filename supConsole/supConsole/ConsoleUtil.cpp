@@ -67,6 +67,59 @@ namespace SC {
 		ConsolePrint(">", SC::ConsoleAttribute(SC::ConsolePrintAttribute::BOLD, SC::GREEN, SC::BLACK));
 		ConsolePrint("", SC::ConsoleAttribute(SC::ConsolePrintAttribute::RESET, SC::WHITE, SC::BLACK));
 	}
+	std::string exec__(const char* cmd) {
+#ifdef SYS_LINUX
+		std::array<char, 128> buffer;
+		std::string result;
+		std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
+		if (!pipe) {
+			throw std::runtime_error("popen() failed!");
+		}
+		while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
+			result += buffer.data();
+		}
+		return result;
+#endif // SYS_LINUX
+#ifdef SYS_WINDOWS
+		std::array<char, 128> buffer;
+		std::string result = "";
+		std::unique_ptr<FILE, decltype(&_pclose)> pipe(_popen(cmd, "r"), _pclose);
+		if (!pipe) {
+			result = ("popen() failed!");
+		}
+		while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
+			result += buffer.data();
+		}
+		return result;
+#endif // SYS_WINDOWS
+
+		
+	}	
+	std::string exec(std::string cmd) {
+
+		std::string data;
+		FILE* stream;
+		const int max_buffer = 256;
+		char buffer[max_buffer];
+		cmd.append(" 2>&1");
+#ifdef SYS_WINDOWS
+		stream = _popen(cmd.c_str(), "r");
+		if (stream) {
+			while (!feof(stream))
+				if (fgets(buffer, max_buffer, stream) != NULL) data.append(buffer);
+			_pclose(stream);
+		}
+#endif // SYS_WINDOWS
+#ifdef SYS_LINUX
+		stream = popen(cmd.c_str(), "r");
+		if (stream) {
+			while (!feof(stream))
+				if (fgets(buffer, max_buffer, stream) != NULL) data.append(buffer);
+			pclose(stream);
+		}
+#endif // SYS_LINUX
+		return data;
+	}
 
 	void process(std::string input)
 	{
@@ -110,11 +163,11 @@ namespace SC {
 
 
 	
-
+	
 		std::istringstream iss(input);
 		for (int i = 0; i < 30; i++)
 		{
-			strList[i] = "";
+			strList[i] = "null";
 		}
 
 		while (iss >> d) {
@@ -140,8 +193,8 @@ namespace SC {
 					clog("starting update...", logType::LOG_NORMAL);
 
 					clog("starting git...", logType::LOG_NORMAL);
-
-					system("git clone https://github.com/Supercip971/Sup-Console-APP.git");
+					clog(exec("git fetch https://github.com/Supercip971/Sup-Console-APP.git"), SC::logType::LOG_NORMAL);
+				//	system();
 				}
 				else
 				{
@@ -150,20 +203,26 @@ namespace SC {
 			}
 			else if (strList[0] == "install" && isCommarg == false)
 			{
+				if (strList[2] != "null" && strList[1] != "null") {
+					clog("do you want to install app " + strList[2] + "from " + strList[1] + "? you have to install git on your computer. type 'y' to install app", logType::LOG_WARNING);
+					std::string input;
 
-				clog("do you want to install app "+strList[1]+ "? you have to install git on your computer. type 'y' to install app", logType::LOG_WARNING);
-				std::string input;
-
-				char* s = new char[1000];
-				fgets(s, 1000, stdin);
-				input = s;
-				if (input[0] == 'y')
-				{
-					clog("install is not supported for the moment sorry", logType::LOG_ERROR);
+					char* s = new char[1000];
+					fgets(s, 1000, stdin);
+					input = s;
+					if (input[0] == 'y')
+					{
+					 // don't work
+						clog(exec("git clone"), SC::logType::LOG_NORMAL);
+					}
+					else
+					{
+						clog("cancelling install...", logType::LOG_NORMAL);
+					}
 				}
 				else
 				{
-					clog("cancelling install...", logType::LOG_NORMAL);
+					clog("the syntax is [appGitLink] [AppName]", logType::LOG_ERROR);
 				}
 			}
 			else

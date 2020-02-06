@@ -22,8 +22,9 @@
 
 #endif // SYS_WINDOWS
 
-
-
+#include <memory>
+#include <stdexcept>
+#include <array>
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <algorithm>
