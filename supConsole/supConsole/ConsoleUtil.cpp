@@ -7,6 +7,7 @@ std::string changeLog = "version 0.1 still in beta"
 		"commit 12 : add changelog and update how subVersion is calc"
 		"commit 13 : add lib for lua support "
 	"commit 14 : support for lua with lua {code} function"; // changelog not updated (used for major release
+
 namespace SC {
 	std::string fPath = "null";
 	std::string sourcefPath = "null";
@@ -263,7 +264,7 @@ namespace SC {
 		}
 		else
 		{
-			ConsolePrint(str, SC::ConsoleAttribute(ConsolePrintAttribute::RESET));
+			ConsolePrint(str, SC::ConsoleAttribute(ConsolePrintAttribute::NULLT));
 		}
 		return 0;
 	}
@@ -272,9 +273,9 @@ namespace SC {
 		int n = lua_gettop(Li);
 
 
-		std::string fcolor = lua_tostring(Li, 1);
-		std::string bcolor = lua_tostring(Li, 2);
-		std::string type = lua_tostring(Li, 3);
+		std::string fcolor =(std::string) lua_tostring(Li, 1);
+		std::string bcolor =(std::string) lua_tostring(Li, 2);
+		std::string type   =(std::string) lua_tostring(Li, 3);
 		SC::ConsoleCol fcolorA = SC::ConsoleCol::WHITE;
 		SC::ConsoleCol bcolorA = SC::ConsoleCol::BLACK;
 		SC::ConsolePrintAttribute attribA = SC::ConsolePrintAttribute::NULLT;
@@ -355,7 +356,7 @@ namespace SC {
 #pragma endregion
 
 		SC::ConsoleAttribute CA(attribA, fcolorA, bcolorA);
-		SC::ConsolePrint("", CA);
+		SC::ConsolePrint("\0", CA);
 		return 0;
 	}
 	static int getFPath(lua_State* Li) { // get path
@@ -454,26 +455,95 @@ namespace SC {
 
 	
 		ClearConsole();
-			
-		
-		
-		ConsolePrint("##########\n", ConsoleAttribute(GREEN));
-		ConsolePrint("#        #\n", ConsoleAttribute(GREEN));
-		ConsolePrint("#  ##### # ", ConsoleAttribute(GREEN));
+		std::string OO ="" ;
+		OO += 219; 
+		std::string OSG = ""; // object small gradient ▓
+		OSG += 178;
+		std::string ONG = ""; // object normal gradient ▒
+		ONG += 177;
+		std::string OBG = ""; // object big gradient ░
+		OBG += 176;
+		char ii = ' ';
+		int Logo[9][9] = {
+			{0,0,0,1,1,1,0,0,0},
+			{1,1,1,0,0,0,1,1,1},
+			{1,0,0,0,0,0,0,0,0},
+			{1,0,0,0,0,0,0,0,0},
+			{1,1,1,1,1,1,1,1,1},
+			{0,0,0,0,0,0,0,0,1},
+			{0,0,0,0,0,0,0,0,1},
+			{1,1,1,3,0,3,1,1,1},
+			{0,0,3,1,1,1,3,0,0}
+		};
 
-		ConsolePrint("SupConsole \n", ConsoleAttribute(S_CYAN));
+		for (int y= 0; y < 9; y++)
+		{
+			for (int x = 0; x < 9; x++)
+			{
+				if (Logo[y][x] == 0)
+				{
 
-		ConsolePrint("# ##     # ", ConsoleAttribute(GREEN));
+					ConsolePrint(" ", ConsoleAttribute(GREEN, BLACK));
+					ConsolePrint(" ", ConsoleAttribute(GREEN, BLACK));
+				}else if (Logo[y][x] == 1)
+				{
+					if (x < 2)
+					{
+
+						ConsolePrint(OBG, ConsoleAttribute(GREEN, S_CYAN));
+						ConsolePrint(OBG, ConsoleAttribute(GREEN, S_CYAN));
+					}else if (x < 4)
+					{
+
+						ConsolePrint(OBG, ConsoleAttribute(BOLD, GREEN, S_CYAN));
+						ConsolePrint(OBG, ConsoleAttribute(BOLD, GREEN, S_CYAN));
+					}else if (x < 6)
+					{
+
+						ConsolePrint(ONG, ConsoleAttribute(GREEN, S_CYAN));
+						ConsolePrint(ONG, ConsoleAttribute(GREEN, S_CYAN));
+					}else if (x < 6)
+					{
+
+						ConsolePrint(ONG, ConsoleAttribute(BOLD, GREEN, S_CYAN));
+						ConsolePrint(ONG, ConsoleAttribute(BOLD, GREEN, S_CYAN));
+					}else if (x < 8)
+					{
+
+						ConsolePrint(OSG, ConsoleAttribute( GREEN, S_CYAN));
+						ConsolePrint(OSG, ConsoleAttribute( GREEN, S_CYAN));
+					}
+					else
+					{
+
+						ConsolePrint(OSG, ConsoleAttribute(BOLD, GREEN, S_CYAN));
+						ConsolePrint(OSG, ConsoleAttribute(BOLD, GREEN, S_CYAN));
+					}
+				}
+				else if (Logo[y][x] == 2)
+				{
+
+					ConsolePrint(OSG, ConsoleAttribute(GREEN, S_CYAN));
+					ConsolePrint(OSG, ConsoleAttribute(GREEN, S_CYAN));
+				}
+				
+				else
+				{
+
+					ConsolePrint(" ", ConsoleAttribute(BLACK));
+					ConsolePrint(" ", ConsoleAttribute(BLACK));
+				}
+			}
+			ConsolePrint(" \n", ConsoleAttribute(BLACK, BLACK));
+		}
+
+		ConsolePrint("SupConsole\n", ConsoleAttribute(GREEN, BLACK));
+
 		if (beta)
 			ConsolePrint("version : [BETA] " + std::to_string(MajorVersion) + "." + std::to_string(minorVersion) + "       edition : " + std::to_string(subVersion) + "\n", ConsoleAttribute(S_CYAN));
 		else
 			ConsolePrint("version : " + std::to_string(MajorVersion) + "." + std::to_string(minorVersion) + "       edition : " + std::to_string(subVersion) + "\n", ConsoleAttribute(S_CYAN));
 		
-		ConsolePrint("#  ####  #\n", ConsoleAttribute(GREEN));
-		ConsolePrint("#     ## #\n", ConsoleAttribute(GREEN));
-		ConsolePrint("# #####  #\n", ConsoleAttribute(GREEN));
-		ConsolePrint("#        #\n", ConsoleAttribute(GREEN));
-		ConsolePrint("########## \n", ConsoleAttribute(GREEN));
 	}
 
 

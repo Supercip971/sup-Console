@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
 	SC::init(0, 0, &fpath, argv); // init the console
 	ConsolePrint("", SC::ConsoleAttribute(SC::ConsolePrintAttribute::RESET, SC::WHITE, SC::BLACK)); // reset
 
-	//		printf("%i%s", i, "\x1B[2D");
+			//printf("%i%s", i, "\x1B[2D");
 	while (true) // main loop, to do create a exit function
 	{
 		SC::start();
@@ -53,8 +53,6 @@ int main(int argc, char* argv[]) {
 		delete[] s;
 
 	}
-
-
 	SC::Close(); 
 	return 0;
 }
