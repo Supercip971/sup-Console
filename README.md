@@ -1,6 +1,6 @@
 ## Sup-Console
 
-![logo](https://nsa40.casimages.com/img/2020/02/06/200206053422480372.png)
+![logo](https://nsa40.casimages.com/img/2020/02/06/20020609002924383.png)
 
 sup-console is a free open source console written in c++ (in beta) 
 It support linux and windows. 
