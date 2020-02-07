@@ -17,36 +17,36 @@ namespace SC {
         lua_pop(state, 1);
     }
 
-    void executeLUA(std::string data)
+    void executeLUA(std::string data, lua_State* L)
     {
-        lua_State* state = luaL_newstate();
+       
 
         // Make standard libraries available in the Lua object
-        luaL_openlibs(state);
+
 
         int result;
 
         // Load the program; this supports both source code and bytecode files.
-        result = luaL_loadstring(state, data.c_str());
+        result = luaL_loadstring(L, data.c_str());
 
         if (result != LUA_OK) {
-            print_errorLUA(state);
+            print_errorLUA(L);
             return;
         }
 
         // Finally,e execute the program by calling into it.
         // Change the arguments if you're not running vanilla Lua code.
 
-        result = lua_pcall(state, 0, LUA_MULTRET, 0);
+        result = lua_pcall(L, 0, LUA_MULTRET, 0);
 
         if (result != LUA_OK) {
-            print_errorLUA(state);
+            print_errorLUA(L);
             return;
         }
     } // execute lua code (without included function)
-	void luaInterp(std::string cmd) {
+	void luaInterp(std::string cmd, lua_State* L) {
 		
-        executeLUA(cmd);
+        executeLUA(cmd, L);
 	} // interpret lua
 
 

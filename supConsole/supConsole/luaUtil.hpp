@@ -7,5 +7,6 @@ namespace SC {
 
 	namespace LU {
 		void LoadLUCommand(lua_State* L); // load all command in lua
+
 	};
 }

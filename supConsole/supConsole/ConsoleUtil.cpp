@@ -123,7 +123,6 @@ namespace SC {
 
 	void process(std::string input)
 	{
-
 		input.erase(std::remove(input.begin(), input.end(), '\n'), input.end());
 		std::string d;
 		int argNum = 0;
@@ -178,7 +177,7 @@ namespace SC {
 		}
 			if (strList[0] == "lua" && isCommarg == true)
 			{
-				luaInterp(commArg);
+				luaInterp(commArg, L);
 			}
 			else if (strList[0] == "update" && isCommarg == false)
 			{
@@ -248,17 +247,14 @@ namespace SC {
 						if (strList[1] == "-help" )
 						{
 							lua_getglobal(L, "help");
-							lua_pcall(L, 0, 0, 0);
 						}
 						else if (strList[1] == "-info" )
 						{
 							lua_getglobal(L, "info");
-							lua_pcall(L, 0, 0, 0);
 						}
 						else if (strList[1] == "-version" )
 						{
 							lua_getglobal(L, "ver");
-							lua_pcall(L, 0, 0, 0);
 						}
 						else
 						{
@@ -267,22 +263,22 @@ namespace SC {
 							{
 								args[i] = strList[i];
 							}
-							lua_pcall(L,0, 0, 0);
-
 						}
 					}
 					else
 					{
-
 						lua_getglobal(L, "run");
 						for (int i = 1; i < numArg; i++)
 						{
 							args[i] = "";
 
 						}
+					}
+					int result = lua_pcall(L, 0, LUA_MULTRET, 0);
 
-						lua_pcall(L, 0, 0, 0);
-
+					if (result != LUA_OK) {
+						print_errorLUA(L);
+						return;
 					}
 					for (int i = 1; i < numArg; i++)
 					{
@@ -293,7 +289,7 @@ namespace SC {
 				}
 			}
 			delete[] strList; // delete
-		
+			comargs = "null";
 	}
 
 	void Close() {

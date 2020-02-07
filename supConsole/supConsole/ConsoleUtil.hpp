@@ -88,8 +88,8 @@ namespace SC {
 	// lua Implementation
 	void print_errorLUA(lua_State* state); // error callback for lua
 
-	void executeLUA(std::string data); // execute lua code
+	void executeLUA(std::string data, lua_State* L); // execute lua code
 
-	void luaInterp(std::string cmd); // interpret lua
+	void luaInterp(std::string cmd, lua_State* L); // interpret lua
 
 }

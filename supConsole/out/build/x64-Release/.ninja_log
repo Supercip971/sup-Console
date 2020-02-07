@@ -57,3 +57,9 @@
 1129	1376	602724784	supConsole/supConsole.exe	b4226412de14adad
 1	1303	602725559	supConsole/CMakeFiles/supConsole.dir/ConsoleUtil.cpp.obj	b9e63690c41ee9be
 1305	1525	602725559	supConsole/supConsole.exe	b4226412de14adad
+7	1002	602730860	supConsole/CMakeFiles/supConsole.dir/luaSC.cpp.obj	ddd0174cf908225
+1	1318	602730860	supConsole/CMakeFiles/supConsole.dir/ConsoleUtil.cpp.obj	b9e63690c41ee9be
+1320	1581	602730861	supConsole/supConsole.exe	b4226412de14adad
+2	1143	602732188	supConsole/CMakeFiles/supConsole.dir/luaSC.cpp.obj	ddd0174cf908225
+8	1434	602732188	supConsole/CMakeFiles/supConsole.dir/ConsoleUtil.cpp.obj	b9e63690c41ee9be
+1436	1876	602732189	supConsole/supConsole.exe	b4226412de14adad
