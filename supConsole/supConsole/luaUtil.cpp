@@ -56,25 +56,30 @@ namespace SC {
 				if (num == numx)
 				{
 					strtoreturn = entry.path().filename().u8string();
-				}numx++;
+				}
+				++numx;
 			}
 
 			lua_pushstring(Li, strtoreturn.c_str());
 			return 1;
 
-		}static int fileNumber(lua_State* Li) {
+		}
+		
+		static int fileNumber(lua_State* Li) {
 
 			std::string np = lua_tostring(Li, 1);
 			int numx = 0;
 			for (const auto& entry : std::experimental::filesystem::directory_iterator(np)) {
 
-				numx++;
+				++numx;
 			}
 
 			lua_pushinteger(Li, numx);
 			return 1;
 
-		}static int fileSize(lua_State* Li) {
+		}
+		
+		static int fileSize(lua_State* Li) {
 
 			std::string np = lua_tostring(Li, 1);
 			
@@ -83,15 +88,26 @@ namespace SC {
 
 			return 1;
 
-		}static int setConsoleCurPos(lua_State* Li) {
+		}
+		
+		static int setConsoleCurPos(lua_State* Li) {
 
 			int npx = lua_tointeger(Li, 1);
 			int npy = lua_tointeger(Li, 2);
 			setConsCurPos({ (float)npx,(float)npy });
 
-
 			return 0;
 
+		}
+
+		static int getOS(lua_State* Li) {
+			int n = lua_gettop(Li);
+			std::string OS = "windows";
+#ifdef SYS_LINUX
+			OS = "linux";
+#endif // SYS_WINDOWS
+			lua_pushstring(Li, OS.c_str());
+			return 1;
 		}
 		void LoadLUCommand(lua_State* L) {
 			lua_register(L, "dirExist", dirExist); //  dirExist(string arg) return : bool  | get if the directory exist or not
@@ -99,7 +115,8 @@ namespace SC {
 			lua_register(L, "fileList", fileList); //  fileList(string path, int numberOfFile) return : string  | get the file number of a list
 			lua_register(L, "fileNumber", fileNumber); //  fileNumber(string path) return : int  | get the file number
 			lua_register(L, "fileSize", fileSize); //  fileSize(string path) return : int  | get the file size
-			lua_register(L, "setConsoleCurPos", setConsoleCurPos); //  description to do
+			lua_register(L, "setConsoleCurPos", setConsoleCurPos); //  setConsoleCurPos(int x, int y) return : nothing | set console cursor pos (-1 for y = don't change y value)
+			lua_register(L, "getOs", getOS); //  getOs () return : string | get the os [linux / windows]
 		};
 
 
