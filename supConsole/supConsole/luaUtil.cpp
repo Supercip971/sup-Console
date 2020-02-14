@@ -57,7 +57,7 @@ namespace SC {
 				{
 					strtoreturn = entry.path().filename().u8string();
 				}
-				++numx;
+					++numx;
 			}
 
 			lua_pushstring(Li, strtoreturn.c_str());
@@ -99,7 +99,7 @@ namespace SC {
 			return 0;
 
 		}
-
+		
 		static int getOS(lua_State* Li) {
 			int n = lua_gettop(Li);
 			std::string OS = "windows";
@@ -109,6 +109,17 @@ namespace SC {
 			lua_pushstring(Li, OS.c_str());
 			return 1;
 		}
+		
+		static int getConsoleSize(lua_State* Li) {
+
+			int npx = lua_tointeger(Li, 1);
+			int npy = lua_tointeger(Li, 2);
+			setConsCurPos({ (float)npx,(float)npy });
+
+			return 2;
+
+		} // doing	
+
 		void LoadLUCommand(lua_State* L) {
 			lua_register(L, "dirExist", dirExist); //  dirExist(string arg) return : bool  | get if the directory exist or not
 			lua_register(L, "dirTop", dirTop); //  dirTop(string arg) return : string  | get the top directory
@@ -116,6 +127,7 @@ namespace SC {
 			lua_register(L, "fileNumber", fileNumber); //  fileNumber(string path) return : int  | get the file number
 			lua_register(L, "fileSize", fileSize); //  fileSize(string path) return : int  | get the file size
 			lua_register(L, "setConsoleCurPos", setConsoleCurPos); //  setConsoleCurPos(int x, int y) return : nothing | set console cursor pos (-1 for y = don't change y value)
+			lua_register(L, "getConsoleSize", getConsoleSize); //  setConsoleCurPos(int x, int y) return : nothing | set console cursor pos (-1 for y = don't change y value)
 			lua_register(L, "getOs", getOS); //  getOs () return : string | get the os [linux / windows]
 		};
 

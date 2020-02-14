@@ -16,7 +16,7 @@ namespace SC {
 	lua_State* L;
 
 	bool beta = true;
-	void ConsolePrint(std::string ttoPrint, ConsoleAttribute attribute) {
+	void ConsolePrint(std::string ttoPrint, ConsoleAttribute attribute) { // print with attribute
 #ifdef SYS_WINDOWS 
 		std::cout << attribute.AttribToString() << ttoPrint  ;
 #endif // SYS_WINDOWS
@@ -27,7 +27,17 @@ namespace SC {
 
 	}
 
-	
+	void ConsolePrintS(std::string ttoPrint) { // console just print without attribute
+#ifdef SYS_WINDOWS 
+		std::cout << ttoPrint;
+#endif // SYS_WINDOWS
+#ifdef SYS_LINUX
+		//snprintf((attribute.AttribToString() + ttoPrint),)
+		printf("%s",  ttoPrint.c_str());
+#endif // SYS_LINUX
+
+	}
+
 
 	void clog(std::string log, logType logtype)
 	{
@@ -488,7 +498,15 @@ namespace SC {
 	}
 #pragma endregion
 
+	static int  LuaPrint(lua_State* Li)
+	{
+		int n = lua_gettop(Li);
 
+
+		std::string str = lua_tostring(Li, 1);
+		ConsolePrintS(str);
+		return 0;
+	}
 	void init(int width, int height, std::string* path, char** argv) {
 		fPath = *path;
 		sourcefPath = fPath;
@@ -512,6 +530,7 @@ namespace SC {
 		lua_register(L, "isArg", isarg); //  isarg(string arg) return : bool  | get if the 'arg' is in the argument list
 		lua_register(L, "setStyle", setStyle); //  setStyle(foregroundCol, backgroundColor, type) return : bool  | get if the 'arg' is in the argument list
 		lua_register(L, "process", processF); //  process(string command) return : nothing  | proccess a command in the console
+		lua_register(L, "prnt", LuaPrint); //  process(string command) return : nothing  | proccess a command in the console
 		SC::LU::LoadLUCommand(L);
 		
 
