@@ -2,11 +2,11 @@
 
 int MajorVersion = 0;
 int minorVersion = 1;
-int subVersion = 29; // for change id (+1 for every commit in github)
+int subVersion = 50; // for change id (+1 for every commit in github)
 std::string changeLog = "version 0.1 still in beta"
 "commit 12 : add changelog and update how subVersion is calc"
 "commit 13 : add lib for lua support "
-"commit 14 : support for lua with lua {code} function"; // changelog not updated (used for major release
+"commit 14 : support for lua with lua {code} function"; // changelog not updated (used for major release)
 
 namespace SC {
 	std::string fPath = "null";
@@ -14,8 +14,12 @@ namespace SC {
 	std::string* args = new std::string[20]{ "null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null","null" }; // max 20 argument :(
 	std::string comargs = "null";
 	lua_State* L;
-
+	std::vector < std::string> systemInfo;
 	bool beta = true;
+	std::vector<std::string>* gettingSysInfo() {
+		systemInfo.push_back("getting system Info");
+		return &systemInfo;
+	}
 	void ConsolePrint(std::string ttoPrint, ConsoleAttribute attribute) { // print with attribute
 #ifdef SYS_WINDOWS
 		std::cout << attribute.AttribToString() << ttoPrint;
@@ -127,6 +131,9 @@ namespace SC {
 	void process(std::string input)
 	{
 		input.erase(std::remove(input.begin(), input.end(), '\n'), input.end());
+		systemInfo.push_back("processing : " + input);
+
+		systemInfo.push_back(" --- " + input + " --- ");
 		std::string d;
 		int argNum = 0;
 		bool isCommarg = false;
@@ -177,6 +184,14 @@ namespace SC {
 		if (strList[0] == "lua" && isCommarg == true)
 		{
 			luaInterp(commArg, L);
+		}
+		else if (strList[0] == "get-log" && isCommarg == false)
+		{
+			for (size_t i = 0; i < systemInfo.size(); i++)
+			{
+				systemInfo[i].erase(std::remove(systemInfo[i].begin(), systemInfo[i].end(), '\n'), systemInfo[i].end());
+				printf("%i : %s \n", i, systemInfo[i].c_str());
+			}
 		}
 		else if (strList[0] == "update" && isCommarg == false)
 		{
@@ -275,6 +290,8 @@ namespace SC {
 
 				if (result != LUA_OK) {
 					print_errorLUA(L);
+
+					systemInfo.push_back(" --- " + input + " --- ");
 					return;
 				}
 				for (int i = 1; i < numArg; i++)
@@ -286,9 +303,12 @@ namespace SC {
 		}
 		delete[] strList; // delete
 		comargs = "null";
+
+		systemInfo.push_back("--- " + input + " --- ");
 	}
 
 	void Close() {
+		systemInfo.push_back("closing lua");
 		clog("closing lua", LOG_NORMAL);
 		lua_close(L);
 	}
@@ -301,6 +321,7 @@ namespace SC {
 
 		std::string str = lua_tostring(Li, 1);
 		std::string type = lua_tostring(Li, 2);
+		systemInfo.push_back("log :" + str);
 		if (type == "error")
 		{
 			clog(str, LOG_ERROR);
@@ -326,6 +347,7 @@ namespace SC {
 		std::string fcolor = (std::string) lua_tostring(Li, 1);
 		std::string bcolor = (std::string) lua_tostring(Li, 2);
 		std::string type = (std::string) lua_tostring(Li, 3);
+		systemInfo.push_back("setting console style :" + fcolor + " " + bcolor + " " + type);
 		SC::ConsoleCol fcolorA = SC::ConsoleCol::WHITE;
 		SC::ConsoleCol bcolorA = SC::ConsoleCol::BLACK;
 		SC::ConsolePrintAttribute attribA = SC::ConsolePrintAttribute::NULLT;
@@ -409,6 +431,7 @@ namespace SC {
 	}
 	static int getFPath(lua_State* Li) { // get path
 		int n = lua_gettop(Li);
+		systemInfo.push_back("get path");
 		lua_pushfstring(Li, (fPath).c_str());
 		return 1;
 	}
@@ -416,6 +439,7 @@ namespace SC {
 	static int getFPathIS(lua_State* Li) { // inverted slash
 		int n = lua_gettop(Li);
 		std::string fpToret = fPath;
+		systemInfo.push_back("get path with inverted slash :" + fPath);
 		std::replace(fpToret.begin(), fpToret.end(), '/', '\\'); // replace all 'x' to 'y'
 		lua_pushfstring(Li, (fpToret).c_str());
 		return 1;
@@ -424,6 +448,7 @@ namespace SC {
 	static int getFPathNS(lua_State* Li) { // normal slash
 		int n = lua_gettop(Li);
 		std::string fpToret = fPath;
+		systemInfo.push_back("get path with normal slash :" + fPath);
 		std::replace(fpToret.begin(), fpToret.end(), '\\', '/'); // replace all 'x' to 'y'
 		lua_pushfstring(Li, (fpToret).c_str());
 		return 1;
@@ -432,6 +457,8 @@ namespace SC {
 	static int setFPath(lua_State* Li) {
 		int n = lua_gettop(Li);
 		std::string np = lua_tostring(Li, 1);
+
+		systemInfo.push_back("set path :" + np);
 		fPath = np;
 		return 0;
 	}
@@ -439,6 +466,7 @@ namespace SC {
 	static int  LuagetVer(lua_State* Li)
 	{
 		int n = lua_gettop(Li);
+		systemInfo.push_back("getting version");
 		lua_pushnumber(Li, MajorVersion);
 		lua_pushnumber(Li, minorVersion);
 		lua_pushnumber(Li, subVersion);
@@ -449,7 +477,8 @@ namespace SC {
 	{
 		int n = lua_gettop(Li);
 		bool findit = false;
-		std::string argtofind = lua_tostring(Li, 1);;
+		std::string argtofind = lua_tostring(Li, 1);
+		systemInfo.push_back("checking if " + argtofind + " is an argument");
 		for (int i = 0; i < 20; i++)
 		{
 			if (args[i] == argtofind)
@@ -465,6 +494,7 @@ namespace SC {
 	static int  getcommarg(lua_State* Li)
 	{
 		int n = lua_gettop(Li);
+		systemInfo.push_back("getting commarg");
 		lua_pushfstring(Li, comargs.c_str());
 
 		return 1;
@@ -475,6 +505,7 @@ namespace SC {
 		int n = lua_gettop(Li);
 
 		std::string procc = lua_tostring(Li, 1);;
+		systemInfo.push_back("processing" + procc);
 		process(procc);
 		return 0;
 	}
@@ -485,6 +516,7 @@ namespace SC {
 		int n = lua_gettop(Li);
 
 		std::string str = lua_tostring(Li, 1);
+		systemInfo.push_back("printing " + str);
 		ConsolePrintS(str);
 		return 0;
 	}
@@ -494,6 +526,7 @@ namespace SC {
 #ifdef SYS_LINUX
 
 #endif // SYS_LINUX
+		systemInfo.push_back("loading... ");
 		clog("loading lua", LOG_NORMAL);
 		L = luaL_newstate();
 
@@ -501,21 +534,45 @@ namespace SC {
 		luaL_openlibs(L);
 
 		clog("loading lua function", LOG_NORMAL);
+		clog("loading lua function : log", LOG_NORMAL);
 		lua_register(L, "log", LuaLog); //  log(logstring, logtype (normal | warning | error or null)) return : nothing | log
+
+		clog("loading lua function : getVer", LOG_NORMAL);
 		lua_register(L, "getVer", LuagetVer); //  getVer() return : majorVersion, minorVersion, subVersion | get versions
+
+		clog("loading lua function : getFilePath", LOG_NORMAL);
 		lua_register(L, "getFilePath", getFPath); //  getFilePath() return : current file path | get the current file path
-		lua_register(L, "getFilePathIS", getFPathIS); //  getFilePathI() return : current file path | get the current file path but / are \
-		lua_register(L, "getFilePathNS", getFPathNS); //  getFilePathI() return : current file path | get the current file path but \ are /
+
+		clog("loading lua function : getFilePathIS", LOG_NORMAL);
+		lua_register(L, "getFilePathIS", getFPathIS); //  getFilePathI() return : current file path | get the current file path but / are \ ;
+
+		clog("loading lua function : getFilePathNS", LOG_NORMAL);
+		lua_register(L, "getFilePathNS", getFPathNS); //  getFilePathI() return : current file path | get the current file path but \ are / ;
+
+		clog("loading lua function : setFilePath", LOG_NORMAL);
 		lua_register(L, "setFilePath", setFPath); //  setFilePath(string path) return : nothing | set current file path
+
+		clog("loading lua function : getCommarg", LOG_NORMAL);
 		lua_register(L, "getCommarg", getcommarg); //  getCommarg() return : string  | get the comm argument
+
+		clog("loading lua function : isArg", LOG_NORMAL);
 		lua_register(L, "isArg", isarg); //  isarg(string arg) return : bool  | get if the 'arg' is in the argument list
+
+		clog("loading lua function : setStyle", LOG_NORMAL);
 		lua_register(L, "setStyle", setStyle); //  setStyle(foregroundCol, backgroundColor, type) return : bool  | get if the 'arg' is in the argument list
+
+		clog("loading lua function : process", LOG_NORMAL);
 		lua_register(L, "process", processF); //  process(string command) return : nothing  | proccess a command in the console
+
+		clog("loading lua function : prnt", LOG_NORMAL);
 		lua_register(L, "prnt", LuaPrint); //  process(string command) return : nothing  | proccess a command in the console
+
+		clog("loading lua misc function", LOG_NORMAL);
 		SC::LU::LoadLUCommand(L);
 
 		clog("loading finish", LOG_NORMAL);
 
+		systemInfo.push_back("loading finished");
 		ClearConsole();
 		std::string OO = "_";
 		OO = 219;
@@ -598,13 +655,21 @@ namespace SC {
 		ConsolePrint("SupConsole\n", ConsoleAttribute(GREEN, BLACK));
 
 		if (beta)
-			ConsolePrint("version : [BETA] " + std::to_string(MajorVersion) + "." + std::to_string(minorVersion) + "       edition : " + std::to_string(subVersion) + "\n", ConsoleAttribute(S_CYAN));
+			ConsolePrint("version : [BETA] " + std::to_string(MajorVersion) + "." + std::to_string(minorVersion) + "       edition : " + std::to_string(subVersion) + "\n", ConsoleAttribute(S_YELLOW));
 		else
 			ConsolePrint("version : " + std::to_string(MajorVersion) + "." + std::to_string(minorVersion) + "       edition : " + std::to_string(subVersion) + "\n", ConsoleAttribute(S_CYAN));
-	}
+
+#ifdef SYS_LINUX
+		ConsolePrint("sup-console linux version \n", ConsoleAttribute(S_CYAN));
+#else
+
+		ConsolePrint("sup-console windows version \n", ConsoleAttribute(S_CYAN));
+#endif
+}
 
 	vec2 getConsSize()
 	{
+		systemInfo.push_back("gettng console size");
 		vec2 size = { 0,0 };
 #ifdef SYS_LINUX
 		struct winsize w;
@@ -624,6 +689,7 @@ namespace SC {
 
 	void setConsCurPos(vec2 p)
 	{
+		systemInfo.push_back("gettng console cursor position");
 		if (p.x == -1)
 		{
 			printf(std::string("\033[;" + std::to_string(int(p.y) + 1) + "H").c_str());
@@ -640,11 +706,12 @@ namespace SC {
 
 	void ClearConsole()
 	{
+		systemInfo.push_back("clear console ");
 #ifdef SYS_LINUX
 		system("clear");
 #endif // SYS_LINUX
 #ifdef SYS_WINDOWS
 		system("cls");
 #endif // SYS_WINDOWS
-	}
+}
 }
