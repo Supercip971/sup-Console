@@ -1,0 +1,5 @@
+D:/source/supConsole/sup-Console/supConsole/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/source/supConsole/sup-Console/supConsole/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+D:/source/supConsole/sup-Console/supConsole/cmake-build-debug/supConsole/CMakeFiles/supConsole.dir
+D:/source/supConsole/sup-Console/supConsole/cmake-build-debug/supConsole/CMakeFiles/edit_cache.dir
+D:/source/supConsole/sup-Console/supConsole/cmake-build-debug/supConsole/CMakeFiles/rebuild_cache.dir

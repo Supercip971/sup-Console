@@ -67,35 +67,35 @@ build rebuild_cache: phony CMakeFiles\rebuild_cache.util
 build cmake_object_order_depends_target_supConsole: phony || supConsole\CMakeFiles\supConsole.dir
 
 build supConsole\CMakeFiles\supConsole.dir\main.cpp.obj: CXX_COMPILER__supConsole ..\..\..\supConsole\main.cpp || cmake_object_order_depends_target_supConsole
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /Zi /O2 /Ob1 /DNDEBUG
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /Zi /O2 /Ob1 /DNDEBUG   -std:c++latest
   OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
   OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir
   TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
   TARGET_PDB = supConsole\supConsole.pdb
 
 build supConsole\CMakeFiles\supConsole.dir\ConsoleUtil.cpp.obj: CXX_COMPILER__supConsole ..\..\..\supConsole\ConsoleUtil.cpp || cmake_object_order_depends_target_supConsole
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /Zi /O2 /Ob1 /DNDEBUG
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /Zi /O2 /Ob1 /DNDEBUG   -std:c++latest
   OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
   OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir
   TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
   TARGET_PDB = supConsole\supConsole.pdb
 
 build supConsole\CMakeFiles\supConsole.dir\ConsoleAttrib.cpp.obj: CXX_COMPILER__supConsole ..\..\..\supConsole\ConsoleAttrib.cpp || cmake_object_order_depends_target_supConsole
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /Zi /O2 /Ob1 /DNDEBUG
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /Zi /O2 /Ob1 /DNDEBUG   -std:c++latest
   OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
   OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir
   TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
   TARGET_PDB = supConsole\supConsole.pdb
 
 build supConsole\CMakeFiles\supConsole.dir\luaSC.cpp.obj: CXX_COMPILER__supConsole ..\..\..\supConsole\luaSC.cpp || cmake_object_order_depends_target_supConsole
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /Zi /O2 /Ob1 /DNDEBUG
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /Zi /O2 /Ob1 /DNDEBUG   -std:c++latest
   OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
   OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir
   TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\
   TARGET_PDB = supConsole\supConsole.pdb
 
 build supConsole\CMakeFiles\supConsole.dir\luaUtil.cpp.obj: CXX_COMPILER__supConsole ..\..\..\supConsole\luaUtil.cpp || cmake_object_order_depends_target_supConsole
-  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /Zi /O2 /Ob1 /DNDEBUG
+  FLAGS = /DWIN32 /D_WINDOWS /W3 /GR /EHsc /MD /Zi /O2 /Ob1 /DNDEBUG   -std:c++latest
   OBJECT_DIR = supConsole\CMakeFiles\supConsole.dir
   OBJECT_FILE_DIR = supConsole\CMakeFiles\supConsole.dir
   TARGET_COMPILE_PDB = supConsole\CMakeFiles\supConsole.dir\

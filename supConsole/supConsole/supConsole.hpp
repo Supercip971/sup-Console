@@ -21,7 +21,13 @@
 #include <windows.h>
 
 #endif // SYS_WINDOWS
+#include <filesystem>
+namespace fs = std::filesystem;
 
+
+
+#include <limits.h>
+#include <stdlib.h>
 #include <memory>
 #include <stdexcept>
 #include <array>

@@ -157,7 +157,7 @@ namespace SC {
 				}
 			}
 		}
-		if (isCommarg == true)
+		if (isCommarg )
 		{
 			 commArg = input.substr(first, last - first);
 			input.erase(first, (last ) - (first));

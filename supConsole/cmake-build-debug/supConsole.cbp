@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="supConsole"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="msvc8"/>
+		<Option virtualFolders="CMake Files\;CMake Files\supConsole\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="D:/source/supConsole/sup-Console/supConsole/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\Makefile VERBOSE=1 all"/>
+					<CompileFile command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="D:/source/supConsole/sup-Console/supConsole/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\Makefile VERBOSE=1 edit_cache"/>
+					<CompileFile command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="D:/source/supConsole/sup-Console/supConsole/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\Makefile VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="supConsole">
+				<Option output="D:/source/supConsole/sup-Console/supConsole/cmake-build-debug/supConsole/supConsole.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/source/supConsole/sup-Console/supConsole/cmake-build-debug/supConsole"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\supConsole\Makefile VERBOSE=1 supConsole"/>
+					<CompileFile command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\supConsole\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\supConsole\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\supConsole\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="supConsole/fast">
+				<Option output="D:/source/supConsole/sup-Console/supConsole/cmake-build-debug/supConsole/supConsole.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="D:/source/supConsole/sup-Console/supConsole/cmake-build-debug/supConsole"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="msvc8"/>
+				<Compiler>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\ATLMFC\include"/>
+					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\include"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"/>
+					<Add directory="C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\supConsole\Makefile VERBOSE=1 supConsole/fast"/>
+					<CompileFile command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\supConsole\Makefile VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\supConsole\Makefile VERBOSE=1 clean"/>
+					<DistClean command="nmake /NOLOGO /f D:\source\supConsole\sup-Console\supConsole\cmake-build-debug\supConsole\Makefile VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/ConsoleAttrib.cpp">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/ConsoleUtil.cpp">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/ConsoleUtil.hpp">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lapi.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lapi.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lauxlib.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lauxlib.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lbaselib.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lbitlib.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lcode.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lcode.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lcorolib.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lctype.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lctype.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/ldblib.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/ldebug.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/ldebug.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/ldo.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/ldo.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/ldump.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lfunc.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lfunc.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lgc.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lgc.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/linit.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/liolib.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/llex.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/llex.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/llimits.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lmathlib.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lmem.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lmem.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/loadlib.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lobject.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lobject.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lopcodes.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lopcodes.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/loslib.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lparser.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lparser.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lprefix.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lstate.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lstate.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lstring.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lstring.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lstrlib.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/ltable.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/ltable.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/ltablib.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/ltm.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/ltm.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lua.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lua.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lua.hpp">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/luac.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/luaconf.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lualib.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lundump.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lundump.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lutf8lib.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lvm.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lvm.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lzio.c">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/lib/lua/lzio.h">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/luaSC.cpp">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/luaUtil.cpp">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/luaUtil.hpp">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/main.cpp">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/project.rc">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/supConsole.hpp">
+			<Option target="supConsole"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="D:/source/supConsole/sup-Console/supConsole/supConsole/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\supConsole\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

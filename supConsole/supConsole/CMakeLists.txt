@@ -14,7 +14,7 @@ file(GLOB ldd
 file(GLOB luad
     "app/*.lua"
 )
-
+set (CMAKE_CXX_STANDARD 20)
 add_executable (supConsole "main.cpp" "supConsole.hpp" "ConsoleUtil.hpp" "ConsoleUtil.cpp" "ConsoleAttrib.cpp" "luaSC.cpp" "luaUtil.cpp" "luaUtil.hpp" ${ldd} project.rc)
 
 # TODO: Ajoutez des tests et installez des cibles si nécessaire.

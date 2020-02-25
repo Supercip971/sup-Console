@@ -119,7 +119,16 @@ namespace SC {
 			return 2;
 
 		} // doing	
+		
+		static int pathAbsolute(lua_State* Li) {
+			int n = lua_gettop(Li);
+			std::string fp = lua_tostring(Li, 1);
+			fp = std::filesystem::absolute(fp).string();
 
+			lua_pushstring(Li, fp.c_str());
+			return 1;
+			
+		}
 		void LoadLUCommand(lua_State* L) {
 			lua_register(L, "dirExist", dirExist); //  dirExist(string arg) return : bool  | get if the directory exist or not
 			lua_register(L, "dirTop", dirTop); //  dirTop(string arg) return : string  | get the top directory
@@ -127,8 +136,9 @@ namespace SC {
 			lua_register(L, "fileNumber", fileNumber); //  fileNumber(string path) return : int  | get the file number
 			lua_register(L, "fileSize", fileSize); //  fileSize(string path) return : int  | get the file size
 			lua_register(L, "setConsoleCurPos", setConsoleCurPos); //  setConsoleCurPos(int x, int y) return : nothing | set console cursor pos (-1 for y = don't change y value)
-			lua_register(L, "getConsoleSize", getConsoleSize); //  setConsoleCurPos(int x, int y) return : nothing | set console cursor pos (-1 for y = don't change y value)
+			lua_register(L, "getConsoleSize", getConsoleSize); //  to do
 			lua_register(L, "getOs", getOS); //  getOs () return : string | get the os [linux / windows]
+			lua_register(L, "pathAbsolute", pathAbsolute); //  pathAbsolute(string path) return : path absolute | for ../ replacing and other thing
 		};
 
 
