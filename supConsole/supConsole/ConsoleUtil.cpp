@@ -4,9 +4,9 @@ int MajorVersion = 0;
 int minorVersion = 1;
 int subVersion = 29; // for change id (+1 for every commit in github)
 std::string changeLog = "version 0.1 still in beta"
-		"commit 12 : add changelog and update how subVersion is calc"
-		"commit 13 : add lib for lua support "
-	"commit 14 : support for lua with lua {code} function"; // changelog not updated (used for major release
+"commit 12 : add changelog and update how subVersion is calc"
+"commit 13 : add lib for lua support "
+"commit 14 : support for lua with lua {code} function"; // changelog not updated (used for major release
 
 namespace SC {
 	std::string fPath = "null";
@@ -17,31 +17,27 @@ namespace SC {
 
 	bool beta = true;
 	void ConsolePrint(std::string ttoPrint, ConsoleAttribute attribute) { // print with attribute
-#ifdef SYS_WINDOWS 
-		std::cout << attribute.AttribToString() << ttoPrint  ;
+#ifdef SYS_WINDOWS
+		std::cout << attribute.AttribToString() << ttoPrint;
 #endif // SYS_WINDOWS
 #ifdef SYS_LINUX
 		//snprintf((attribute.AttribToString() + ttoPrint),)
 		printf("%s%s", attribute.AttribToString().c_str(), ttoPrint.c_str());
 #endif // SYS_LINUX
-
 	}
 
 	void ConsolePrintS(std::string ttoPrint) { // console just print without attribute
-#ifdef SYS_WINDOWS 
+#ifdef SYS_WINDOWS
 		std::cout << ttoPrint;
 #endif // SYS_WINDOWS
 #ifdef SYS_LINUX
 		//snprintf((attribute.AttribToString() + ttoPrint),)
-		printf("%s",  ttoPrint.c_str());
+		printf("%s", ttoPrint.c_str());
 #endif // SYS_LINUX
-
 	}
-
 
 	void clog(std::string log, logType logtype)
 	{
-
 		switch (logtype)
 		{
 		case SC::LOG_NORMAL:
@@ -49,13 +45,13 @@ namespace SC {
 			ConsolePrint("[LOG] : ", SC::ConsoleAttribute(ConsoleCol::GREEN));
 			ConsolePrint(log + "\n", SC::ConsoleAttribute(ConsoleCol::WHITE));
 			break;
-		
+
 		case SC::LOG_WARNING:
 			ConsolePrint("", SC::ConsoleAttribute(ConsolePrintAttribute::RESET));
 			ConsolePrint("[WARNING] : ", SC::ConsoleAttribute(ConsoleCol::YELLOW));
 			ConsolePrint(log + "\n", SC::ConsoleAttribute(ConsoleCol::WHITE));
 			break;
-		
+
 		case SC::LOG_ERROR:
 			ConsolePrint("", SC::ConsoleAttribute(ConsolePrintAttribute::RESET));
 			ConsolePrint("[ERROR] : ", SC::ConsoleAttribute(ConsoleCol::RED));
@@ -102,11 +98,8 @@ namespace SC {
 		}
 		return result;
 #endif // SYS_WINDOWS
-
-		
-	}	
+	}
 	std::string exec(std::string cmd) {
-
 		std::string data;
 		FILE* stream;
 		const int max_buffer = 256;
@@ -153,26 +146,23 @@ namespace SC {
 				}
 				else
 				{
-					clog( " '{' is used after '}' ", SC::LOG_ERROR);
+					clog(" '{' is used after '}' ", SC::LOG_ERROR);
 				}
 			}
 		}
-		if (isCommarg )
+		if (isCommarg)
 		{
-			 commArg = input.substr(first, last - first);
-			input.erase(first, (last ) - (first));
+			commArg = input.substr(first, last - first);
+			input.erase(first, (last)-(first));
 
 			commArg.erase(std::remove(commArg.begin(), commArg.end(), '}'), commArg.end());
 			commArg.erase(std::remove(commArg.begin(), commArg.end(), '{'), commArg.end());
 			input.erase(std::remove(input.begin(), input.end(), '}'), input.end());
 			input.erase(std::remove(input.begin(), input.end(), '{'), input.end()); // used for commarg
 			comargs = commArg;
-		//	clog(commArg + " is  commArgument", SC::LOG_NORMAL);
+			//	clog(commArg + " is  commArgument", SC::LOG_NORMAL);
 		}
 
-
-	
-	
 		std::istringstream iss(input);
 		for (int i = 0; i < 30; i++)
 		{
@@ -183,15 +173,36 @@ namespace SC {
 			strList[numArg] = d;
 			++numArg;
 			++argNum;
-
 		}
-			if (strList[0] == "lua" && isCommarg == true)
+		if (strList[0] == "lua" && isCommarg == true)
+		{
+			luaInterp(commArg, L);
+		}
+		else if (strList[0] == "update" && isCommarg == false)
+		{
+			clog("do you want to update app ? you have to install git on your computer. type 'y' to update app", logType::LOG_WARNING);
+			std::string input;
+
+			char* s = new char[1000];
+			fgets(s, 1000, stdin);
+			input = s;
+			if (input[0] == 'y')
 			{
-				luaInterp(commArg, L);
+				clog("starting update...", logType::LOG_NORMAL);
+
+				clog("starting git...", logType::LOG_NORMAL);
+				clog(exec("git fetch https://github.com/Supercip971/Sup-Console-APP.git"), SC::logType::LOG_NORMAL);
+				//	system();
 			}
-			else if (strList[0] == "update" && isCommarg == false)
+			else
 			{
-				clog("do you want to update app ? you have to install git on your computer. type 'y' to update app", logType::LOG_WARNING);
+				clog("cancelling update...", logType::LOG_NORMAL);
+			}
+		}
+		else if (strList[0] == "install" && isCommarg == false)
+		{
+			if (strList[2] != "null" && strList[1] != "null") {
+				clog("do you want to install app " + strList[2] + "from " + strList[1] + "? you have to install git on your computer. type 'y' to install app", logType::LOG_WARNING);
 				std::string input;
 
 				char* s = new char[1000];
@@ -199,107 +210,82 @@ namespace SC {
 				input = s;
 				if (input[0] == 'y')
 				{
-					clog("starting update...", logType::LOG_NORMAL);
-
-					clog("starting git...", logType::LOG_NORMAL);
-					clog(exec("git fetch https://github.com/Supercip971/Sup-Console-APP.git"), SC::logType::LOG_NORMAL);
-				//	system();
+					// don't work
+					clog(exec("git clone"), SC::logType::LOG_NORMAL);
 				}
 				else
 				{
-					clog("cancelling update...", logType::LOG_NORMAL);
-				}
-			}
-			else if (strList[0] == "install" && isCommarg == false)
-			{
-				if (strList[2] != "null" && strList[1] != "null") {
-					clog("do you want to install app " + strList[2] + "from " + strList[1] + "? you have to install git on your computer. type 'y' to install app", logType::LOG_WARNING);
-					std::string input;
-
-					char* s = new char[1000];
-					fgets(s, 1000, stdin);
-					input = s;
-					if (input[0] == 'y')
-					{
-					 // don't work
-						clog(exec("git clone"), SC::logType::LOG_NORMAL);
-					}
-					else
-					{
-						clog("cancelling install...", logType::LOG_NORMAL);
-					}
-				}
-				else
-				{
-					clog("the syntax is [appGitLink] [AppName]", logType::LOG_ERROR);
+					clog("cancelling install...", logType::LOG_NORMAL);
 				}
 			}
 			else
 			{
-				std::string errorPrevious = "";
-				if (luaL_dofile(L, ("Sup-Console-APP/" + strList[0] + ".lua").c_str())) {
-					errorPrevious = lua_tostring(L, -1);
-					if (luaL_dofile(L, ("Sup-Console-USER-APP/" + strList[0] + "/"+ "main.lua").c_str())) // CHANGE HOW TO GET AN APP
-					{
-
-						clog(lua_tostring(L, -1), SC::LOG_LUA_ERROR);
-						clog("and", SC::LOG_LUA_ERROR);
-						clog(errorPrevious, SC::LOG_LUA_ERROR);
-					}
-				}
-				else
+				clog("the syntax is [appGitLink] [AppName]", logType::LOG_ERROR);
+			}
+		}
+		else
+		{
+			std::string errorPrevious = "";
+			if (luaL_dofile(L, ("Sup-Console-APP/" + strList[0] + ".lua").c_str())) {
+				errorPrevious = lua_tostring(L, -1);
+				if (luaL_dofile(L, ("Sup-Console-USER-APP/" + strList[0] + "/" + "main.lua").c_str())) // CHANGE HOW TO GET AN APP
 				{
-					lua_pcall(L, 0, 0, 0);
+					clog(lua_tostring(L, -1), SC::LOG_LUA_ERROR);
+					clog("and", SC::LOG_LUA_ERROR);
+					clog(errorPrevious, SC::LOG_LUA_ERROR);
+				}
+			}
+			else
+			{
+				lua_pcall(L, 0, 0, 0);
 
-					if (numArg > 1)
+				if (numArg > 1)
+				{
+					// we can not do switch on string :(
+					if (strList[1] == "-help")
 					{
-						 // we can not do switch on string :(
-						if (strList[1] == "-help" )
-						{
-							lua_getglobal(L, "help");
-						}
-						else if (strList[1] == "-info" )
-						{
-							lua_getglobal(L, "info");
-						}
-						else if (strList[1] == "-version" )
-						{
-							lua_getglobal(L, "ver");
-						}
-						else
-						{
-							lua_getglobal(L, "run");
-							for (int i = 1; i < numArg; i++)
-							{
-								args[i] = strList[i];
-							}
-						}
+						lua_getglobal(L, "help");
+					}
+					else if (strList[1] == "-info")
+					{
+						lua_getglobal(L, "info");
+					}
+					else if (strList[1] == "-version")
+					{
+						lua_getglobal(L, "ver");
 					}
 					else
 					{
 						lua_getglobal(L, "run");
 						for (int i = 1; i < numArg; i++)
 						{
-							args[i] = "";
-
+							args[i] = strList[i];
 						}
 					}
-					int result = lua_pcall(L, 0, LUA_MULTRET, 0);
-
-					if (result != LUA_OK) {
-						print_errorLUA(L);
-						return;
-					}
+				}
+				else
+				{
+					lua_getglobal(L, "run");
 					for (int i = 1; i < numArg; i++)
 					{
-						strList[i] = "null";
-						 // reset
+						args[i] = "";
 					}
+				}
+				int result = lua_pcall(L, 0, LUA_MULTRET, 0);
 
+				if (result != LUA_OK) {
+					print_errorLUA(L);
+					return;
+				}
+				for (int i = 1; i < numArg; i++)
+				{
+					strList[i] = "null";
+					// reset
 				}
 			}
-			delete[] strList; // delete
-			comargs = "null";
+		}
+		delete[] strList; // delete
+		comargs = "null";
 	}
 
 	void Close() {
@@ -313,13 +299,13 @@ namespace SC {
 	{
 		int n = lua_gettop(Li);
 
-		
 		std::string str = lua_tostring(Li, 1);
-		std::string type= lua_tostring(Li, 2); 
+		std::string type = lua_tostring(Li, 2);
 		if (type == "error")
 		{
 			clog(str, LOG_ERROR);
-		}else if (type == "normal")
+		}
+		else if (type == "normal")
 		{
 			clog(str, LOG_NORMAL);
 		}
@@ -337,14 +323,13 @@ namespace SC {
 	{
 		int n = lua_gettop(Li);
 
-
-		std::string fcolor =(std::string) lua_tostring(Li, 1);
-		std::string bcolor =(std::string) lua_tostring(Li, 2);
-		std::string type   =(std::string) lua_tostring(Li, 3);
+		std::string fcolor = (std::string) lua_tostring(Li, 1);
+		std::string bcolor = (std::string) lua_tostring(Li, 2);
+		std::string type = (std::string) lua_tostring(Li, 3);
 		SC::ConsoleCol fcolorA = SC::ConsoleCol::WHITE;
 		SC::ConsoleCol bcolorA = SC::ConsoleCol::BLACK;
 		SC::ConsolePrintAttribute attribA = SC::ConsolePrintAttribute::NULLT;
-					// can't do switch on string >:(
+		// can't do switch on string >:(
 #pragma region ForGroundColor
 		if (fcolor == "white")
 			fcolorA = SC::ConsoleCol::WHITE;
@@ -377,7 +362,6 @@ namespace SC {
 #pragma endregion
 #pragma region Background
 
-
 		if (bcolor == "white")
 			bcolorA = SC::ConsoleCol::WHITE;
 		else if (bcolor == "black")
@@ -406,7 +390,6 @@ namespace SC {
 			bcolorA = SC::ConsoleCol::YELLOW;
 		else if (bcolor == "syellow")
 			bcolorA = SC::ConsoleCol::S_YELLOW;
-	
 
 #pragma endregion
 #pragma region Type
@@ -429,7 +412,7 @@ namespace SC {
 		lua_pushfstring(Li, (fPath).c_str());
 		return 1;
 	}
-	
+
 	static int getFPathIS(lua_State* Li) { // inverted slash
 		int n = lua_gettop(Li);
 		std::string fpToret = fPath;
@@ -437,7 +420,7 @@ namespace SC {
 		lua_pushfstring(Li, (fpToret).c_str());
 		return 1;
 	}
-	
+
 	static int getFPathNS(lua_State* Li) { // normal slash
 		int n = lua_gettop(Li);
 		std::string fpToret = fPath;
@@ -445,15 +428,14 @@ namespace SC {
 		lua_pushfstring(Li, (fpToret).c_str());
 		return 1;
 	}
-	
-	static int setFPath(lua_State* Li) {
 
+	static int setFPath(lua_State* Li) {
 		int n = lua_gettop(Li);
 		std::string np = lua_tostring(Li, 1);
 		fPath = np;
 		return 0;
 	}
-	
+
 	static int  LuagetVer(lua_State* Li)
 	{
 		int n = lua_gettop(Li);
@@ -462,12 +444,12 @@ namespace SC {
 		lua_pushnumber(Li, subVersion);
 		return 3;
 	}
-	
+
 	static int  isarg(lua_State* Li)
 	{
 		int n = lua_gettop(Li);
 		bool findit = false;
-		std::string argtofind =lua_tostring(Li, 1);;
+		std::string argtofind = lua_tostring(Li, 1);;
 		for (int i = 0; i < 20; i++)
 		{
 			if (args[i] == argtofind)
@@ -479,11 +461,11 @@ namespace SC {
 
 		return 1;
 	}
-	
+
 	static int  getcommarg(lua_State* Li)
 	{
 		int n = lua_gettop(Li);
-		lua_pushfstring(Li, comargs.c_str() );
+		lua_pushfstring(Li, comargs.c_str());
 
 		return 1;
 	}
@@ -502,7 +484,6 @@ namespace SC {
 	{
 		int n = lua_gettop(Li);
 
-
 		std::string str = lua_tostring(Li, 1);
 		ConsolePrintS(str);
 		return 0;
@@ -511,7 +492,7 @@ namespace SC {
 		fPath = *path;
 		sourcefPath = fPath;
 #ifdef SYS_LINUX
-	
+
 #endif // SYS_LINUX
 		clog("loading lua", LOG_NORMAL);
 		L = luaL_newstate();
@@ -523,7 +504,7 @@ namespace SC {
 		lua_register(L, "log", LuaLog); //  log(logstring, logtype (normal | warning | error or null)) return : nothing | log
 		lua_register(L, "getVer", LuagetVer); //  getVer() return : majorVersion, minorVersion, subVersion | get versions
 		lua_register(L, "getFilePath", getFPath); //  getFilePath() return : current file path | get the current file path
-		lua_register(L, "getFilePathIS", getFPathIS); //  getFilePathI() return : current file path | get the current file path but / are \ 
+		lua_register(L, "getFilePathIS", getFPathIS); //  getFilePathI() return : current file path | get the current file path but / are \
 		lua_register(L, "getFilePathNS", getFPathNS); //  getFilePathI() return : current file path | get the current file path but \ are /
 		lua_register(L, "setFilePath", setFPath); //  setFilePath(string path) return : nothing | set current file path
 		lua_register(L, "getCommarg", getcommarg); //  getCommarg() return : string  | get the comm argument
@@ -532,15 +513,12 @@ namespace SC {
 		lua_register(L, "process", processF); //  process(string command) return : nothing  | proccess a command in the console
 		lua_register(L, "prnt", LuaPrint); //  process(string command) return : nothing  | proccess a command in the console
 		SC::LU::LoadLUCommand(L);
-		
 
-		
 		clog("loading finish", LOG_NORMAL);
 
-	
 		ClearConsole();
-		std::string OO ="_" ;
-		OO = 219; 
+		std::string OO = "_";
+		OO = 219;
 		std::string OSG = "_"; // object semall gradient ▓
 		OSG = 178;
 		std::string ONG = "_"; // object normal gradient ▒
@@ -560,60 +538,56 @@ namespace SC {
 			{0,0,3,1,1,1,3,0,0}
 		};
 
-		for (int y= 0; y < 9; y++)
+		for (int y = 0; y < 9; y++)
 		{
 			for (int x = 0; x < 9; x++)
 			{
 				if (Logo[y][x] == 0)
 				{
-
 					ConsolePrint(" ", ConsoleAttribute(GREEN, BLACK));
 					ConsolePrint(" ", ConsoleAttribute(GREEN, BLACK));
-				}else if (Logo[y][x] == 1)
+				}
+				else if (Logo[y][x] == 1)
 				{
 					if (x < 2)
 					{
-
 						ConsolePrint(OBG, ConsoleAttribute(GREEN, S_CYAN));
 						ConsolePrint(OBG, ConsoleAttribute(GREEN, S_CYAN));
-					}else if (x < 4)
+					}
+					else if (x < 4)
 					{
-
 						ConsolePrint(OBG, ConsoleAttribute(BOLD, GREEN, S_CYAN));
 						ConsolePrint(OBG, ConsoleAttribute(BOLD, GREEN, S_CYAN));
-					}else if (x < 6)
+					}
+					else if (x < 6)
 					{
-
 						ConsolePrint(ONG, ConsoleAttribute(GREEN, S_CYAN));
 						ConsolePrint(ONG, ConsoleAttribute(GREEN, S_CYAN));
-					}else if (x < 6)
+					}
+					else if (x < 6)
 					{
-
 						ConsolePrint(ONG, ConsoleAttribute(BOLD, GREEN, S_CYAN));
 						ConsolePrint(ONG, ConsoleAttribute(BOLD, GREEN, S_CYAN));
-					}else if (x < 8)
+					}
+					else if (x < 8)
 					{
-
-						ConsolePrint(OSG, ConsoleAttribute( GREEN, S_CYAN));
-						ConsolePrint(OSG, ConsoleAttribute( GREEN, S_CYAN));
+						ConsolePrint(OSG, ConsoleAttribute(GREEN, S_CYAN));
+						ConsolePrint(OSG, ConsoleAttribute(GREEN, S_CYAN));
 					}
 					else
 					{
-
 						ConsolePrint(OSG, ConsoleAttribute(BOLD, GREEN, S_CYAN));
 						ConsolePrint(OSG, ConsoleAttribute(BOLD, GREEN, S_CYAN));
 					}
 				}
 				else if (Logo[y][x] == 2)
 				{
-
 					ConsolePrint(OSG, ConsoleAttribute(GREEN, S_CYAN));
 					ConsolePrint(OSG, ConsoleAttribute(GREEN, S_CYAN));
 				}
-				
+
 				else
 				{
-
 					ConsolePrint(" ", ConsoleAttribute(BLACK));
 					ConsolePrint(" ", ConsoleAttribute(BLACK));
 				}
@@ -627,12 +601,7 @@ namespace SC {
 			ConsolePrint("version : [BETA] " + std::to_string(MajorVersion) + "." + std::to_string(minorVersion) + "       edition : " + std::to_string(subVersion) + "\n", ConsoleAttribute(S_CYAN));
 		else
 			ConsolePrint("version : " + std::to_string(MajorVersion) + "." + std::to_string(minorVersion) + "       edition : " + std::to_string(subVersion) + "\n", ConsoleAttribute(S_CYAN));
-		
 	}
-
-
-
-	
 
 	vec2 getConsSize()
 	{
@@ -640,10 +609,10 @@ namespace SC {
 #ifdef SYS_LINUX
 		struct winsize w;
 		ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
-		size.y = (float) w.ws_row;
-		size.x = (float) w.ws_col;
+		size.y = (float)w.ws_row;
+		size.x = (float)w.ws_col;
 #endif // SYS_LINUX
-		
+
 #ifdef SYS_WINDOWS
 		CONSOLE_SCREEN_BUFFER_INFO csbi;
 		GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
@@ -658,14 +627,15 @@ namespace SC {
 		if (p.x == -1)
 		{
 			printf(std::string("\033[;" + std::to_string(int(p.y) + 1) + "H").c_str());
-		}else if (p.y == -1)
+		}
+		else if (p.y == -1)
 		{
 			printf(std::string("\033[" + std::to_string(int(p.x) + 1) + "G").c_str());
-		}else
+		}
+		else
 		{
 			printf(std::string("\033[" + std::to_string(int(p.x) + 1) + ";" + std::to_string(int(p.y) + 1) + "H").c_str());
 		}
-			
 	}
 
 	void ClearConsole()
@@ -677,5 +647,4 @@ namespace SC {
 		system("cls");
 #endif // SYS_WINDOWS
 	}
-
 }

@@ -1,6 +1,4 @@
-
 #include "supConsole.hpp"
-
 
 // all non super important lua function
 namespace SC {
@@ -10,17 +8,12 @@ namespace SC {
 		return in.tellg();
 	}
 	namespace LU {
-
-
-
-
-
 		static int dirExist(lua_State* Li) {
 			int n = lua_gettop(Li);
 
 			std::string np = lua_tostring(Li, 1);
 
-			 struct stat info ;
+			struct stat info;
 			bool direxist = false;
 
 			if (stat(np.c_str(), &info) != 0)
@@ -29,7 +22,6 @@ namespace SC {
 				direxist = true;
 			else
 				direxist = false;
-
 
 			lua_pushboolean(Li, direxist);
 
@@ -45,61 +37,50 @@ namespace SC {
 		}
 
 		static int fileList(lua_State* Li) {
-
 			std::string np = lua_tostring(Li, 1);
 			std::string strtoreturn = "an error has occur";
 			int num = lua_tointeger(Li, 2);
 			int numx = 0;
 			for (const auto& entry : std::experimental::filesystem::directory_iterator(np)) {
-				
 				entry.path();
 				if (num == numx)
 				{
 					strtoreturn = entry.path().filename().u8string();
 				}
-					++numx;
+				++numx;
 			}
 
 			lua_pushstring(Li, strtoreturn.c_str());
 			return 1;
-
 		}
-		
-		static int fileNumber(lua_State* Li) {
 
+		static int fileNumber(lua_State* Li) {
 			std::string np = lua_tostring(Li, 1);
 			int numx = 0;
 			for (const auto& entry : std::experimental::filesystem::directory_iterator(np)) {
-
 				++numx;
 			}
 
 			lua_pushinteger(Li, numx);
 			return 1;
-
 		}
-		
-		static int fileSize(lua_State* Li) {
 
+		static int fileSize(lua_State* Li) {
 			std::string np = lua_tostring(Li, 1);
-			
+
 			lua_pushinteger(Li, SC::filesize(np.c_str()));
 
-
 			return 1;
-
 		}
-		
-		static int setConsoleCurPos(lua_State* Li) {
 
+		static int setConsoleCurPos(lua_State* Li) {
 			int npx = lua_tointeger(Li, 1);
 			int npy = lua_tointeger(Li, 2);
 			setConsCurPos({ (float)npx,(float)npy });
 
 			return 0;
-
 		}
-		
+
 		static int getOS(lua_State* Li) {
 			int n = lua_gettop(Li);
 			std::string OS = "windows";
@@ -109,17 +90,15 @@ namespace SC {
 			lua_pushstring(Li, OS.c_str());
 			return 1;
 		}
-		
-		static int getConsoleSize(lua_State* Li) {
 
+		static int getConsoleSize(lua_State* Li) {
 			int npx = lua_tointeger(Li, 1);
 			int npy = lua_tointeger(Li, 2);
 			setConsCurPos({ (float)npx,(float)npy });
 
 			return 2;
+		} // doing
 
-		} // doing	
-		
 		static int pathAbsolute(lua_State* Li) {
 			int n = lua_gettop(Li);
 			std::string fp = lua_tostring(Li, 1);
@@ -127,7 +106,6 @@ namespace SC {
 
 			lua_pushstring(Li, fp.c_str());
 			return 1;
-			
 		}
 		void LoadLUCommand(lua_State* L) {
 			lua_register(L, "dirExist", dirExist); //  dirExist(string arg) return : bool  | get if the directory exist or not
@@ -140,10 +118,5 @@ namespace SC {
 			lua_register(L, "getOs", getOS); //  getOs () return : string | get the os [linux / windows]
 			lua_register(L, "pathAbsolute", pathAbsolute); //  pathAbsolute(string path) return : path absolute | for ../ replacing and other thing
 		};
-
-
 	};
-
-
-
 }
